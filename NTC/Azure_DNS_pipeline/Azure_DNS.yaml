@@ -1,0 +1,251 @@
+trigger: none
+
+resources:
+  repositories:
+  - repository: Azure_DNS
+    type: git
+    name: PremFina Landing Zone/Azure_DNS
+    trigger:
+      branches:
+        include:
+        - main
+        - releases/*
+
+variables:
+- group: 'IaC_General'
+- name: SourceRepositoryName
+  value: Azure_DNS 
+  readonly: true
+- name: TestURI
+  value: www.google.com
+
+stages:
+- stage: Build
+  displayName: Generate Terraform plan
+  jobs:
+  - job: TerraformPlan
+    displayName: Generate Terraform plan
+    pool: 'linux_pba'
+    steps:
+
+    - checkout: 'git://$(System.TeamProject)/${{ variables.SourceRepositoryName }}@$(Build.SourceBranch)'
+      clean: true
+      persistCredentials: true
+      displayName: 'Checkout Pull request source branch'
+    
+    - script: 
+        sudo apt update
+      displayName: 'Update package reference'   
+
+    - script: |
+        if ! [[ $(which zip) ]]; then
+          echo "Zip not installed"
+          sudo apt install zip -y
+        fi
+      displayName: 'Check and install Zip' 
+
+    - script: 
+        if ! [[ $(which docker) && $(docker --version) ]]; then
+          sudo snap install docker;
+          sudo snap restart docker;
+        fi
+      displayName: 'Check and install Docker'
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+      displayName: Install latest version of Terraform
+      inputs:
+        terraformVersion: 'latest' 
+    
+    - task: TerraformCLI@0
+      displayName: Terraform init
+      inputs:
+        command: 'init'
+        workingDirectory: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env'
+        backendType: 'azurerm'
+        backendServiceArm: 'sc-pf-sub-cpl-mg'
+        backendAzureRmSubscriptionId: $(subscription_id)
+        backendAzureRmResourceGroupName: $(resource_group_name)
+        backendAzureRmStorageAccountName: $(storage_account_name)
+        backendAzureRmContainerName: $(container_name)
+        backendAzureRmKey: 'azure_dns.tfstate'
+        allowTelemetryCollection: false
+
+    - task: TerraformCLI@0
+      displayName: Generate Terraform plan
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env'
+        environmentServiceName: 'sc-pf-sub-cpl-id'
+        commandOptions: '-out tf.tfplan'
+        allowTelemetryCollection: false
+        publishPlanResults: 'Terraform Plan'
+
+    - script: |
+        mkdir -p ~/${{ variables.SourceRepositoryName }}
+        cd $(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env
+        terraform show -no-color -json $(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env/tf.tfplan > ~/${{ variables.SourceRepositoryName }}/tf.json
+      displayName: Convert Terraform plan to json
+
+    - script: |       
+        sudo docker pull bridgecrew/checkov
+        sudo docker run --rm --volume ~/${{ variables.SourceRepositoryName }}:/Terraform --workdir /Terraform bridgecrew/checkov -f tf.json --output junitxml --skip-check CKV_AZURE_183,CKV2_AZURE_31 --skip-download --soft-fail > ~/${{ variables.SourceRepositoryName }}/report.xml
+      displayName: 'Terraform static code analysis'
+      condition: 'succeededOrFailed()'
+
+    - task: PublishTestResults@2
+      displayName: 'Publish results'
+      condition: always()
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/report.xml'
+        searchFolder: '/home/AzDevOps/Azure_DNS/'
+        testRunTitle: 'Checkov Scan'
+        publishRunAttachments: true
+        failTaskOnFailedTests: true
+
+    - script: |       
+        rm -R ~/${{ variables.SourceRepositoryName }}
+        sudo docker container prune --force
+      displayName: 'Clean environment'
+      condition: 'succeededOrFailed()'
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish artifact with Terraform configuration
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}'
+        ArtifactName: '${{ variables.SourceRepositoryName }}'
+        publishLocation: 'Container'
+
+- stage: Apply
+  displayName: Provision infrastructure
+  dependsOn: Build
+  jobs:
+  - deployment: TerraformApply
+    timeoutInMinutes: 0
+    displayName: Provision infrastructure
+    pool: 'linux_pba'
+    environment: "identity_dns"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - script: 
+              sudo apt update
+            displayName: 'Update package reference'   
+
+          - script: |
+              if ! [[ $(which zip) ]]; then
+                echo "Zip not installed"
+                sudo apt install zip -y
+              fi
+            displayName: 'Check and install Zip' 
+
+          - task: DownloadBuildArtifacts@1
+            displayName: Download artifact with Terraform configuration
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: '${{ variables.SourceRepositoryName }}'
+              downloadPath: '$(Build.SourcesDirectory)'
+
+          - script: |       
+              sudo chmod -R 755 $(Build.SourcesDirectory)
+            displayName: 'Change permissions'
+
+          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+            displayName: Install latest version of Terraform
+            inputs:
+              terraformVersion: 'latest'
+
+          - task: TerraformCLI@0
+            displayName: Terraform init
+            inputs:
+              command: 'init'
+              workingDirectory: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env'
+              backendType: 'azurerm'
+              backendServiceArm: 'sc-pf-sub-cpl-mg'
+              backendAzureRmSubscriptionId: $(subscription_id)
+              backendAzureRmResourceGroupName: $(resource_group_name)
+              backendAzureRmStorageAccountName: $(storage_account_name)
+              backendAzureRmContainerName: $(container_name)
+              backendAzureRmKey: 'azure_dns.tfstate'
+              allowTelemetryCollection: false
+
+          - task: TerraformCLI@0
+            displayName: Apply Terraform plan
+            inputs:
+              command: 'apply'
+              workingDirectory: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env'
+              environmentServiceName: 'sc-pf-sub-cpl-id'
+              allowTelemetryCollection: false
+
+          # - bash: |
+          #     if curl -s --head --request GET ${{ variables.TestURI }}| grep "200 OK" > /dev/null ; then
+          #       echo "The Virtual machine scale set was able to reach the URI. Check the configuration"
+          #       exit 1
+          #     fi
+
+- stage: Plan
+  displayName: Generate Terraform plan
+  dependsOn: Apply
+  jobs:
+  - job: TerraformPlan
+    displayName: Generate Terraform plan
+    pool: 'linux_pba'
+    steps:
+
+    - script: 
+        sudo apt update
+      displayName: 'Update package reference'   
+      
+    - script: |
+        if ! [[ $(which zip) ]]; then
+          echo "Zip not installed"
+          sudo apt install zip -y
+        fi
+      displayName: 'Check and install Zip' 
+
+    - task: DownloadBuildArtifacts@1
+      displayName: Download artifact with Terraform configuration
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '${{ variables.SourceRepositoryName }}'
+        downloadPath: '$(Build.SourcesDirectory)'
+
+    - script: |       
+        sudo chmod -R 755 $(Build.SourcesDirectory)
+      displayName: 'Change permissions'
+
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+      displayName: Install latest version of Terraform
+      inputs:
+        terraformVersion: 'latest'
+
+    - task: TerraformCLI@0
+      displayName: Terraform init
+      inputs:
+        command: 'init'
+        workingDirectory: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env'
+        backendType: 'azurerm'
+        backendServiceArm: 'sc-pf-sub-cpl-mg'
+        backendAzureRmSubscriptionId: $(subscription_id)
+        backendAzureRmResourceGroupName: $(resource_group_name)
+        backendAzureRmStorageAccountName: $(storage_account_name)
+        backendAzureRmContainerName: $(container_name)
+        backendAzureRmKey: 'azure_dns.tfstate'
+        allowTelemetryCollection: false
+
+    - task: TerraformCLI@0
+      displayName: Generate Terraform plan
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/env'
+        environmentServiceName: 'sc-pf-sub-cpl-id'
+        commandOptions: '-out $(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/tf.tfplan'
+        allowTelemetryCollection: false
+        publishPlanResults: 'Terraform Validate'
+
+    - script: 
+        terraform show $(Build.SourcesDirectory)/${{ variables.SourceRepositoryName }}/tf.tfplan | if grep "no changes are needed."; then echo "The plan is not empty"; exit 1; fi
+      displayName: 'Check the Terraform plan'
