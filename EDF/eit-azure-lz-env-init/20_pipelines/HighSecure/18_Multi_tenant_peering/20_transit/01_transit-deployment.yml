@@ -1,0 +1,9 @@
+---
+variables:
+  # transit production
+  enable_production_transit: false
+  teardownEnvironment_production_transit: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210114"

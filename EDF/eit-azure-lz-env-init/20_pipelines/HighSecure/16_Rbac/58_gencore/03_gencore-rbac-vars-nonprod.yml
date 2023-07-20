@@ -1,0 +1,11 @@
+---
+variables:
+  serviceConnectionName_nonprod_gencore: "gen-np-hs-mgmt"
+  tfStateResourceGroupName_nonprod_gencore: ".terraformBootstrap"
+  tfStateStorageAccountName_nonprod_gencore: "avmgennphsmgmtsub01tf"
+  tfStateContainerName_nonprod_gencore: "statefiles"
+  tfWorkingFolder_nonprod_gencore: "$(System.DefaultWorkingDirectory)/10_projects/13_GenCoreHS/16_Rbac"
+  tfStateFile_nonprod_gencore: "gencore-nprd-rbac.tfstate"
+  envConfiguration_nonprod_gencore: "../../../env/16_Rbac/58_gencore/04_nprd.gencore.mgmt.tfvars"
+  agent_pool_nonprod_gencore: "vmss-ado-hs"
+  enable_apply_nonprod_gencore: false

@@ -1,0 +1,23 @@
+---
+variables:
+  # Prod config eamapp
+  serviceConnectionName_production_eamapp: "eam-prod-app"
+  tfStateResourceGroupName_production_eamapp: ".terraformBootstrap"
+  tfStateStorageAccountName_production_eamapp: "avmgenprdhswkloadsub01tf"
+  tfStateContainerName_production_eamapp: "statefiles"
+  tfWorkingFolder_eamapp: "$(System.DefaultWorkingDirectory)/10_projects/03_EamApp/10_Paas"
+  tfStateFile_production_eamapp: "eamapp-production-paas.tfstate"
+  envConfiguration_production_eamapp: "../../../env/10_Paas/50_eam/05_production.eamapp.tfvars"
+  agent_pool_production_eamapp: "vmss-ado-hs"
+  enable_apply_production_eamapp: false
+
+  # Prod config eamci
+  serviceConnectionName_production_eamci: "eam-prod-ci"
+  tfStateResourceGroupName_production_eamci: ".terraformBootstrap"
+  tfStateStorageAccountName_production_eamci: "avmgenprdhscisub01tf"
+  tfStateContainerName_production_eamci: "statefiles"
+  tfWorkingFolder_eamci: "$(System.DefaultWorkingDirectory)/10_projects/03_EamCi/10_Paas"
+  tfStateFile_production_eamci: "eamci-production-paas.tfstate"
+  envConfiguration_production_eamci: "../../../env/10_Paas/50_eam/06_production.eamci.tfvars"
+  agent_pool_production_eamci: "vmss-ado-hs"
+  enable_apply_production_eamci: false

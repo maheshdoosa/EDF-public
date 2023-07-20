@@ -1,0 +1,49 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/10_SnowMidHS/01_Networking
+      - /20_pipelines/HighSecure/01_Networking/56_snowmid
+      - /env/01_Networking/56_snowmid
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/10_SnowMidHS/01_Networking
+#       - /20_pipelines/HighSecure/01_Networking/56_snowmid
+#       - /env/01_Networking/56_snowmid
+
+# pool:
+#   name: "Ubuntu-Agents"
+
+variables:
+  - template: 01_snowmid-Deployment.yml
+  - template: 02_snowmid-networking-vars-production.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+# Anything below should not be modified ##
+stages:
+  # SnowMid Production
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Productionsnowmid"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_snowmid }}
+      stage_name: "Production_SnowMid"
+      deployment_jobname: "Deployment_Production_SnowMid"
+      teardown_jobname: "Teardown_Production_SnowMid"
+      teardown_environment: ${{ variables.teardownEnvironment_production_snowmid }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_snowmid }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_snowmid }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_snowmid }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_snowmid }}
+      tf_statefile: ${{ variables.tfStateFile_production_snowmid }}
+      env_configuration: ${{ variables.envConfiguration_production_snowmid }}
+      enable_stage: ${{ variables.enable_production_snowmid }}
+      agent_pool: ${{ variables.agent_pool_production_snowmid }}
+      enable_apply: ${{ variables.enable_apply_production_snowmid }}

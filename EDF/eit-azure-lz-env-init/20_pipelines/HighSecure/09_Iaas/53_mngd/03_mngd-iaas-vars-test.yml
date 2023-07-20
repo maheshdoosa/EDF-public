@@ -1,0 +1,45 @@
+---
+variables:
+  # mngd test # Not In Use
+  serviceConnectionName_test_mngdapp: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapp: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapp: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapp: "statefiles"
+  tfWorkingFolder_mngdapp: "$(System.DefaultWorkingDirectory)/10_projects/08_ComsyHS/09_Iaas"
+  tfStateFile_test_mngdapp: "" # Not In Use
+  envConfiguration_test_mngdapp: "" # Not In Use
+  agent_pool_test_mngdapp: "vmss-ado-hs"
+  enable_apply_test_mngdapp: false
+
+  # mngdApex test & mngdApex Dev
+  serviceConnectionName_test_mngdapex: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapex: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapex: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapex: "statefiles"
+  tfWorkingFolder_mngdapex: "$(System.DefaultWorkingDirectory)/10_projects/11_ApexHS/09_Iaas"
+  tfStateFile_test_mngdapex: "mngdapex-test-iaas.tfstate"
+  envConfiguration_test_mngdapex: "../../../env/09_Iaas/53_mngd/02_test.mngdapex.mgmt.tfvars"
+  agent_pool_test_mngdapex: "vmss-ado-hs"
+  enable_apply_test_mngdapex: false
+
+  # mngdApex Uat
+  serviceConnectionName_test_mngdapex_uat: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapex_uat: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapex_uat: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapex_uat: "statefiles"
+  tfWorkingFolder_mngdapex_uat: "$(System.DefaultWorkingDirectory)/10_projects/11_ApexHS/09_Iaas_uat"
+  tfStateFile_test_mngdapex_uat: "mngdapex-test-iaas-uat.tfstate"
+  envConfiguration_test_mngdapex_uat: "../../../env/09_Iaas/53_mngd/02_np.mngdapex.mgmt.uat.tfvars"
+  agent_pool_test_mngdapex_uat: "vmss-ado-hs"
+  enable_apply_test_mngdapex_uat: false
+
+  # mngddtgw Dev
+  serviceConnectionName_test_mngddtgw: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngddtgw: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngddtgw: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngddtgw: "statefiles"
+  tfWorkingFolder_mngddtgw: "$(System.DefaultWorkingDirectory)/10_projects/16_DataGatewayHS/09_Iaas"
+  tfStateFile_test_mngddtgw: "mngddtgw-test-Iaas01.tfstate"
+  envConfiguration_test_mngddtgw: "../../../env/09_Iaas/53_mngd/02_test.mngddtgw.mgmt.tfvars"
+  agent_pool_test_mngddtgw: "vmss-ado-hs"
+  enable_apply_test_mngddtgw: false

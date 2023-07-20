@@ -1,0 +1,23 @@
+---
+# Override default rule settings of YamlLint, full list of rules and meaning: https://yamllint.readthedocs.io/en/stable/rules.html#
+# It extends the default conf by adjusting some options.
+
+extends: default
+
+ignore:
+  /github/workspace/20_pipelines/Common/azure-deployment.yml
+  /github/workspace/20_pipelines/Common/azure-lz-core.yml
+  /github/workspace/20_pipelines/Common/azure-wvd-deployment.yml
+  /github/workspace/20_pipelines/Common/tf-tasks-common.yml
+
+rules:
+  line-length: disable  # Disable line-length rule
+  ignore:
+  - /github/workspace/20_pipelines/Common/azure-deployment.yml
+  - /github/workspace/20_pipelines/Common/azure-lz-core.yml
+  - /github/workspace/20_pipelines/Common/azure-wvd-deployment.yml
+  - /github/workspace/20_pipelines/Common/tf-tasks-common.yml
+#  new-line-at-end-of-file: disable
+#  generic-api-key: disable
+  truthy:
+    allowed-values: ['true', 'false', 'on'] # Allowed values for truthy rule

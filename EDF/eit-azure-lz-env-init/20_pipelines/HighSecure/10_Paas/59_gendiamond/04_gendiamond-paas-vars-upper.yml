@@ -1,0 +1,15 @@
+---
+variables:
+  # Gendiamond Upper
+  serviceConnectionName_upper_gendiamond: "gen-upr-hs-wkload"
+  tfStateResourceGroupName_upper_gendiamond: ".terraformBootstrap"
+  tfStateStorageAccountName_upper_gendiamond: "avmgenuprhswkloadsub01tf"
+  tfStateContainerName_upper_gendiamond: "statefiles"
+  tfStateFile_upper_gendiamond: "gendiamond-upper-paas-new.tfstate"
+  tfWorkingFolder_upper_gendiamond:   "$(System.DefaultWorkingDirectory)/10_projects/14_GenDiamondHS/10_Paas_upr"
+  envConfiguration_upper_gendiamond: "../../../env/10_Paas/59_gendiamond/03_gendiamondhs.upper.mgmt.tfvars"
+  agent_pool_upper_gendiamond: "vmss-ado-hs"
+  enable_apply_upper_gendiamond: false
+  # enable_import3: false
+  # import_module_name1: '"module.StorageAccount.azurerm_storage_account.az_sa_standard[0]"'
+  # ResourceID1: "resourceGroups/.terraformBootstrap/providers/Microsoft.Storage/storageAccounts/avmgenuprhswkloadsub01tf"

@@ -1,0 +1,13 @@
+---
+variables:
+  # gencore Nprod
+  enable_nonprod_gencore: false
+  teardownEnvironment_nonprod_gencore: false
+
+  # gencore production
+  enable_production_gencore: false
+  teardownEnvironment_production_gencore: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

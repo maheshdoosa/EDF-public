@@ -1,0 +1,9 @@
+---
+variables:
+  # eamapp production
+  enable_production_eamapp: false
+  teardownEnvironment_production_eamapp: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210114"

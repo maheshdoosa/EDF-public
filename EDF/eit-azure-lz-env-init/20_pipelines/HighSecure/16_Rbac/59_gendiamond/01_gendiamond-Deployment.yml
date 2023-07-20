@@ -1,0 +1,17 @@
+---
+variables:
+  # gendiamond staging  ## Not In Use
+  enable_staging_gendiamond: false
+  teardownEnvironment_staging_gendiamond: false
+
+  # gendiamond lower
+  enable_lower_gendiamond: false
+  teardownEnvironment_lower_gendiamond: false
+
+  # gendiamond upper
+  enable_upper_gendiamond: false
+  teardownEnvironment_upper_gendiamond: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

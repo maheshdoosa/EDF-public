@@ -1,0 +1,12 @@
+---
+variables:
+  # MIM Production
+  serviceConnectionName_production_mim: "eit-prd-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_production_mim: ".terraformBootstrap"
+  tfStateStorageAccountName_production_mim: "avmeitprdhsmngdsub01tf"
+  tfStateContainerName_production_mim: "statefiles"
+  tfWorkingFolder_mim: "$(System.DefaultWorkingDirectory)/10_projects/18_MimHS/09_Iaas_prod"
+  tfStateFile_production_mim: "mim-prd-iaas.tfstate"
+  envConfiguration_production_mim: "../../../env/09_Iaas/62_mim/03_prod.mim.mgmt.tfvars"
+  agent_pool_production_mim: "vmss-ado-hs"
+  enable_apply_production_mim: false

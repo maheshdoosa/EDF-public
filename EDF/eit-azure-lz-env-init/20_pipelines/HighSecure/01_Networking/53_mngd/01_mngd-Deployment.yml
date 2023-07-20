@@ -1,0 +1,21 @@
+---
+variables:
+  # mngdapp test
+  enable_test_mngdapp: false
+  teardownEnvironment_test_mngdapp: false
+
+  # mngdapp production
+  enable_production_mngdapp: false
+  teardownEnvironment_production_mngdapp: false
+
+  # mngdapex test
+  enable_test_mngdapex: false
+  teardownEnvironment_test_mngdapex: false
+
+  # mngdapex UAT
+  enable_test_mngdapex_uat: false
+  teardownEnvironment_test_mngdapex_uat: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

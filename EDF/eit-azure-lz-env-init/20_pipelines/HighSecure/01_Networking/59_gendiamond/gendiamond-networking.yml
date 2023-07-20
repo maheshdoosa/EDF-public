@@ -1,0 +1,89 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/14_GenDiamondHS/01_Networking
+      - /20_pipelines/HighSecure/01_Networking/59_gendiamond
+      - /env/01_Networking/59_gendiamond
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/14_GenDiamondHS/01_Networking
+#       - /20_pipelines/HighSecure/01_Networking/59_gendiamond
+#       - /env/01_Networking/59_gendiamond
+
+variables:
+  - template: 01_gendiamond-Deployment.yml
+  - template: 02_gendiamond-networking-vars-staging.yml
+  - template: 04_gendiamond-networking-vars-upper.yml
+  - template: 03_gendiamond-networking-vars-lower.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+# Anything below should not be modified ##
+stages:
+  # Gendiamond Staging
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "staging_GenDiamond"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_staging_gendiamond }}
+      stage_name: "staging_GenDiamond"
+      deployment_jobname: "Deployment_staging_GenDiamond"
+      teardown_jobname: "Teardown_staging_GenDiamond"
+      teardown_environment: ${{ variables.teardownEnvironment_staging_gendiamond }}
+      service_connectionname: ${{ variables.serviceConnectionName_staging_gendiamond }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_staging_gendiamond }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_staging_gendiamond }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_staging_gendiamond }}
+      tf_statefile: ${{ variables.tfStateFile_staging_gendiamond }}
+      env_configuration: ${{ variables.envConfiguration_staging_gendiamond }}
+      enable_stage: ${{ variables.enable_staging_gendiamond }}
+      agent_pool: ${{ variables.agent_pool_staging_gendiamond }}
+      enable_apply: ${{ variables.enable_apply_staging_gendiamond }}
+  # Gendiamond Lower
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "lower_GenDiamond"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_lower_gendiamond }}
+      stage_name: "lower_GenDiamond"
+      deployment_jobname: "Deployment_lower_GenDiamond"
+      teardown_jobname: "Teardown_lower_GenDiamond"
+      teardown_environment: ${{ variables.teardownEnvironment_lower_gendiamond }}
+      service_connectionname: ${{ variables.serviceConnectionName_lower_gendiamond }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_lower_gendiamond }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_lower_gendiamond }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_lower_gendiamond }}
+      tf_statefile: ${{ variables.tfStateFile_lower_gendiamond }}
+      env_configuration: ${{ variables.envConfiguration_lower_gendiamond }}
+      enable_stage: ${{ variables.enable_lower_gendiamond }}
+      agent_pool: ${{ variables.agent_pool_lower_gendiamond }}
+      enable_apply: ${{ variables.enable_apply_lower_gendiamond }}
+      enable_import: ${{ variables.enable_import }}
+      import_module_name: ${{ variables.import_module_name }}
+      ResourceID: ${{ variables.ResourceID }}
+  # Gendiamond Upper
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "upper_GenDiamond"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_upper_gendiamond }}
+      stage_name: "upper_GenDiamond"
+      deployment_jobname: "Deployment_upper_GenDiamond"
+      teardown_jobname: "Teardown_upper_GenDiamond"
+      teardown_environment: ${{ variables.teardownEnvironment_upper_gendiamond }}
+      service_connectionname: ${{ variables.serviceConnectionName_upper_gendiamond }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_upper_gendiamond }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_upper_gendiamond }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_upper_gendiamond }}
+      tf_statefile: ${{ variables.tfStateFile_upper_gendiamond }}
+      env_configuration: ${{ variables.envConfiguration_upper_gendiamond }}
+      enable_stage: ${{ variables.enable_upper_gendiamond }}
+      agent_pool: ${{ variables.agent_pool_upper_gendiamond }}
+      enable_apply: ${{ variables.enable_apply_upper_gendiamond }}

@@ -1,0 +1,17 @@
+---
+variables:
+  #nuclear production
+  enable_production_nuclear: false
+  teardownEnvironment_production_nuclear: false
+
+  #nuclear non-prod
+  enable_nonprod_nuclear: false
+  teardownEnvironment_nonprod_nuclear: false
+
+  #nuclear test
+  enable_test_nuclear: false
+  teardownEnvironment_test_nuclear: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

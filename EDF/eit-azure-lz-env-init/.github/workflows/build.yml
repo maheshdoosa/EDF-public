@@ -1,0 +1,36 @@
+---
+name: Analyze pull request
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: SonarQube Code Analysis
+    runs-on: ubuntu-latest
+    env:
+      HEAD: ${{ github.HEAD_REF }}
+
+    steps:
+      - name: Setup sonarqube
+        uses: warchant/setup-sonar-scanner@v3
+
+      - name: "Checkout repository on branch: ${{ github.REF }}"
+        uses: actions/checkout@v2
+        with:
+          ref: "${{ env.HEAD }}"
+
+      - name: Retrieve entire repository history
+        run: |
+          git fetch --prune --unshallow
+      - name: Run an analysis of the PR
+        run: sonar-scanner
+          -Dsonar.host.url=https://${{ secrets.SONARQUBE_HOST }}
+          -Dsonar.login=${{ secrets.SONARQUBE_TOKEN }}
+          -Dsonar.projectKey=edfenergy_eit-azure-lz-env-init
+          -Dsonar.pullrequest.key=${{ github.event.number }}
+          -Dsonar.pullrequest.branch="${{ env.HEAD }}"
+          -Dsonar.pullrequest.base=${{ github.BASE_REF }}
+          -Dsonar.pullrequest.github.repository=${{ github.repository }}
+          -Dsonar.scm.provider=git
+          -Dsonar.java.binaries=/tmp

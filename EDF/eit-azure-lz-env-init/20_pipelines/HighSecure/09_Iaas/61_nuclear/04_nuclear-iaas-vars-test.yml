@@ -1,0 +1,12 @@
+---
+variables:
+  # Control-M Sandpit
+  serviceConnectionName_test_nuclear: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_nuclear: ".terraformBootstrap"
+  tfStateStorageAccountName_test_nuclear: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_nuclear: "statefiles"
+  tfWorkingFolder_test_nuclear: "$(System.DefaultWorkingDirectory)/10_projects/17_NuclearRnDHS/09_Iaas_tst"
+  tfStateFile_test_nuclear: "nuclear-test-iaas.tfstate"
+  envConfiguration_test_nuclear: "../../../env/09_Iaas/61_nuclear/05_test.nuclear.mgmt.tfvars" #updated the value
+  agent_pool_test_nuclear: "vmss-ado-hs"
+  enable_apply_test_nuclear: false

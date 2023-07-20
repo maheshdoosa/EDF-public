@@ -1,0 +1,37 @@
+---
+variables:
+  # mngdapp test
+  enable_test_mngdapp: false
+  teardownEnvironment_test_mngdapp: false
+
+  # mngdapp production Comsy
+  enable_production_mngdapp_prd: false
+  teardownEnvironment_production_mngdapp_prd: false
+
+  # mngdapex test
+  enable_test_mngdapex: true
+  teardownEnvironment_test_mngdapex: false
+
+  # mngdapex UAT
+  enable_test_mngdapex_uat: false
+  teardownEnvironment_test_mngdapex_uat: false
+
+  # mngdapex production
+  enable_production_mngdapex: false
+  teardownEnvironment_production_mngdapex: false
+
+  # mngddtgw dev
+  enable_test_mngddtgw: false
+  teardownEnvironment_test_mngddtgw: false
+
+  # mngdHS production (06_managedHS)
+  enable_production_mngd: false
+  teardownEnvironment_production_mngd: false
+
+  # mngdHS non-production (06_managedHS)
+  enable_nonproduction_mngd: false
+  teardownEnvironment_nonproduction_mngd: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

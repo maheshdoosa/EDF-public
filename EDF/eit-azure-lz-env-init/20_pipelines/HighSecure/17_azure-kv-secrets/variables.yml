@@ -1,0 +1,7 @@
+---
+variables:
+  azureSubscription: az-lz-staging
+  storageAccount_name: nsgfilesharest
+  file_shareName: nsgshare
+  sourcefile: kv.csv
+  kvname: stgkvtest

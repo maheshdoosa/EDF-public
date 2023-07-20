@@ -1,0 +1,93 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/17_NuclearRnDHS/09_Iaas_prd
+      - /10_projects/17_NuclearRnDHS/09_Iaas_preprod
+      - /10_projects/17_NuclearRnDHS/09_Iaas_tst
+      - /20_pipelines/HighSecure/09_Iaas/61_nuclear
+      - /env/09_Iaas/61_nuclear
+
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/15_ControlMHS/09_Iaas
+#       - /20_pipelines/HighSecure/09_Iaas/60_nuclear
+#       - /env/09_Iaas/60_nuclear
+
+# pool:
+#   name: "Ubuntu-Agents"
+
+variables:
+  - template: 01_nuclear-Deployment.yml
+  - template: 02_nuclear-iaas-vars-production.yml
+  - template: 03_nuclear-iaas-vars-preprod.yml
+  - template: 04_nuclear-iaas-vars-test.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+## Anything below should not be modified ##
+stages:
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      ####################### workload #####################################
+      ##Production
+      environment_name: "Productionnuclear"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_nuclear }}
+      stage_name: "Production_nuclear"
+      deployment_jobname: "Deployment_Production_nuclear"
+      teardown_jobname: "Teardown_Production_nuclear"
+      teardown_environment: ${{ variables.teardownEnvironment_production_nuclear }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_nuclear }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_nuclear }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_nuclear }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_nuclear }}
+      tf_statefile: ${{ variables.tfStateFile_production_nuclear }}
+      env_configuration: ${{ variables.envConfiguration_production_nuclear }}
+      enable_stage: ${{ variables.enable_production_nuclear }}
+      agent_pool: ${{ variables.agent_pool_production_nuclear }}
+      enable_apply: ${{ variables.enable_apply_production_nuclear }}
+    # Pre-Prod
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "nonprodnuclear"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_nonprod_nuclear }}
+      stage_name: "nonprod_nuclear"
+      deployment_jobname: "Deployment_nonprod_nuclear"
+      teardown_jobname: "Teardown_nonprod_nuclear"
+      teardown_environment: ${{ variables.teardownEnvironment_nonprod_nuclear }}
+      service_connectionname: ${{ variables.serviceConnectionName_nonprod_nuclear }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_nonprod_nuclear }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_nonprod_nuclear }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_nonprod_nuclear }}
+      tf_statefile: ${{ variables.tfStateFile_nonprod_nuclear }}
+      env_configuration: ${{ variables.envConfiguration_nonprod_nuclear }}
+      enable_stage: ${{ variables.enable_nonprod_nuclear }}
+      agent_pool: ${{ variables.agent_pool_nonprod_nuclear }}
+      enable_apply: ${{ variables.enable_apply_nonprod_nuclear }}
+  # test
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "testnuclear"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_test_nuclear }}
+      stage_name: "test_nuclear"
+      deployment_jobname: "Deployment_test_nuclear"
+      teardown_jobname: "Teardown_test_nuclear"
+      teardown_environment: ${{ variables.teardownEnvironment_test_nuclear }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_nuclear }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_nuclear }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_nuclear }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_nuclear }}
+      tf_statefile: ${{ variables.tfStateFile_test_nuclear }}
+      env_configuration: ${{ variables.envConfiguration_test_nuclear }}
+      enable_stage: ${{ variables.enable_test_nuclear }}
+      agent_pool: ${{ variables.agent_pool_test_nuclear }}
+      enable_apply: ${{ variables.enable_apply_test_nuclear }}

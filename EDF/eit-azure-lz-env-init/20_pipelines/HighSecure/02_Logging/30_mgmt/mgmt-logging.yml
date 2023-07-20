@@ -1,0 +1,47 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/01_Management/02_Logging
+      - /20_pipelines/HighSecure/02_Logging/30_mgmt
+      - /env/02_Logging/03_production.management.tfvars
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/01_Management/02_Logging
+#       - /20_pipelines/HighSecure/02_Logging/30_mgmt
+#       - /env/02_Logging/03_production.management.tfvars
+
+variables:
+  - template: 01_mgmt-deployment.yml
+  - template: 02_mgmt-logging-vars-production.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+
+# Anything below should not be modified ##
+stages:
+# Mgmt Production
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Productionmgmt"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_management }}
+      stage_name: "Production_management"
+      deployment_jobname: "Deployment_Production_management"
+      teardown_jobname: "Teardown_Production_management"
+      teardown_environment: ${{ variables.teardownEnvironment_production_management }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_management }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_management }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_management }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_management }}
+      tf_statefile: ${{ variables.tfStateFile_production_management }}
+      env_configuration: ${{ variables.envConfiguration_production_management }}
+      enable_stage: ${{ variables.enable_production_management }}
+      agent_pool: ${{ variables.agent_pool_production_management }}
+      enable_apply: ${{ variables.enable_apply_production_management }}

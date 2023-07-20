@@ -1,0 +1,1188 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "type": "String",
+            "metadata": {
+                "description": "Username for the Virtual Machine."
+            }
+        },
+        "adminPassword": {
+            "type": "SecureString",
+            "metadata": {
+                "description": "Password for the Virtual Machine."
+            }
+        },
+        "FortiGateNamePrefix": {
+            "defaultValue": "eituksalzt1fw",
+            "type": "String",
+            "metadata": {
+                "description": "Naming prefix for all deployed resources"
+            }
+        },
+        "FortiGateImageSKU": {
+            "defaultValue": "fortinet_fg-vm",
+            "allowedValues": [
+                "fortinet_fg-vm",
+                "fortinet_fg-vm_payg_20190624"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Identifies whether to to use PAYG (on demand licensing) or BYOL license model (where license is purchased separately)"
+            }
+        },
+        "FortiGateImageVersion": {
+            "defaultValue": "latest",
+            "allowedValues": [
+                "6.0.7",
+                "6.0.8",
+                "6.0.9",
+                "6.2.0",
+                "6.2.1",
+                "6.2.2",
+                "6.2.3",
+                "6.4.0",
+                "latest"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Only 6.x has the A/P HA feature currently"
+            }
+        },
+        "instanceType": {
+            "defaultValue": "Standard_F4s",
+            "allowedValues": [
+                "Standard_F4s",
+                "Standard_F8s",
+                "Standard_F4",
+                "Standard_F8",
+                "Standard_F8s_v2",
+                "Standard_DS3_v2",
+                "Standard_DS4_v2",
+                "Standard_D8s_v3"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Virtual Machine size selection - must be F4 or other instance that supports 4 NICs"
+            }
+        },
+        "publicIPNewOrExisting": {
+            "defaultValue": "new",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Identify if to use a public IP, and if so whether it's new"
+            }
+        },
+        "publicIP2NewOrExisting": {
+            "defaultValue": "new",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Whether to use a public IP and if so whether it is new"
+            }
+        },
+        "publicIP3NewOrExisting": {
+            "defaultValue": "new",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Whether to use a public IP and if so whether it is new"
+            }
+        },
+        "publicIPName": {
+            "defaultValue": "eituksalzt1fw-pip-01",
+            "type": "String",
+            "metadata": {
+                "description": "Name of Public IP address element."
+            }
+        },
+        "publicIPResourceGroup": {
+            "defaultValue": "eit-uks-alz-t1fw-rg",
+            "type": "String",
+            "metadata": {
+                "description": "Resource group to which the Public IP belongs."
+            }
+        },
+        "publicIP2Name": {
+            "defaultValue": "eituksalzt1fwa-pip-01",
+            "type": "String",
+            "metadata": {
+                "description": "Name of Public IP address element."
+            }
+        },
+        "publicIP2ResourceGroup": {
+            "defaultValue": "eit-uks-alz-t1fw-rg",
+            "type": "String",
+            "metadata": {
+                "description": "Resource group to which the Public IP belongs."
+            }
+        },
+        "publicIP3Name": {
+            "defaultValue": "eituksalzt1fwb-pip-01",
+            "type": "String",
+            "metadata": {
+                "description": "Name of Public IP address element."
+            }
+        },
+        "publicIP3ResourceGroup": {
+            "defaultValue": "eit-uks-alz-t1fw-rg",
+            "type": "String",
+            "metadata": {
+                "description": "Resource group to which the Public IP belongs."
+            }
+        },
+        "publicIPAddressType": {
+            "defaultValue": "Static",
+            "allowedValues": [
+                "Dynamic",
+                "Static"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Type of public IP address"
+            }
+        },
+        "vnetNewOrExisting": {
+            "defaultValue": "existing",
+            "allowedValues": [
+                "new",
+                "existing"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Identify whether to use a new or existing vnet"
+            }
+        },
+        "vnetName": {
+            "defaultValue": "eit-uks-alz-transit-vnet-01",
+            "type": "String",
+            "metadata": {
+                "description": "Name of the Azure virtual network."
+            }
+        },
+        "vnetResourceGroup": {
+            "defaultValue": "eit-uks-alz-transit-vnet-rg",
+            "type": "String",
+            "metadata": {
+                "description": "Resource Group containing the virtual network - or new resource group from above (if new vnet)"
+            }
+        },
+        "vnetAddressPrefix": {
+            "defaultValue": "10.216.16.0/22",
+            "type": "String",
+            "metadata": {
+                "description": "Virtual Network Address prefix"
+            }
+        },
+        "subnet1Name": {
+            "defaultValue": "eit-alz-t1ext-snet-01",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW external subnet"
+            }
+        },
+        "subnet1Prefix": {
+            "defaultValue": "10.216.16.0/26",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW external subnet"
+            }
+        },
+        "subnet2Name": {
+            "defaultValue": "eit-alz-t1int-snet-01",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW internal subnet"
+            }
+        },
+        "subnet2Prefix": {
+            "defaultValue": "10.216.16.64/26",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW internal subnet"
+            }
+        },
+        "subnet3Name": {
+            "defaultValue": "eit-alz-t1hasync-snet-01",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW ha-sync subnet"
+            }
+        },
+        "subnet3Prefix": {
+            "defaultValue": "10.216.16.128/26",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW ha-sync subnet"
+            }
+        },
+        "subnet4Name": {
+            "defaultValue": "eit-alz-t1mgmt-snet-01",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW mgmt subnet"
+            }
+        },
+        "subnet4Prefix": {
+            "defaultValue": "10.216.16.192/26",
+            "type": "String",
+            "metadata": {
+                "description": "Tier 1 FW mgmt subnet"
+            }
+        },
+        "FortinetTags": {
+            "defaultValue": {
+                "provider": "6EB3B02F-50E5-4A3E-8CB8-2E129258317D"
+            },
+            "type": "Object"
+        }
+    },
+    "variables": {
+        "computeApiVersion": "2018-06-01",
+        "networkApiVersion": "2018-11-01",
+        "resourceApiVersion": "2018-05-01",
+        "acceleratedNetworking": "[if(or(equals(parameters('FortiGateImageVersion'),'6.0.6'),equals(parameters('FortiGateImageVersion'),'6.2.1'),equals(parameters('FortiGateImageVersion'),'latest')),'true','false')]",
+        "compute_AvailabilitySet_FG_Name": "[concat(parameters('FortiGateNamePrefix'),'-avs')]",
+        "compute_AvailabilitySet_FG_Id": "[resourceId('Microsoft.Compute/availabilitySets', variables('compute_AvailabilitySet_FG_Name'))]",
+        "vnetName": "[if(equals(parameters('vnetName'),''),concat(parameters('FortiGateNamePrefix'),'-VNET'),parameters('vnetName'))]",
+        "vnetID": "[if(equals(parameters('vnetNewOrExisting'),'new'),resourceId('Microsoft.Network/virtualNetworks', variables('vnetName')),resourceId(parameters('vnetResourceGroup'),'Microsoft.Network/virtualNetworks', variables('vnetName')))]",
+        "subnet1Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet1Name'))]",
+        "subnet2Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet2Name'))]",
+        "subnet3Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet3Name'))]",
+        "subnet4Ref": "[concat(variables('vnetID'),'/subnets/', parameters('subnet4Name'))]",
+        "fg1VmName": "[concat(parameters('FortiGateNamePrefix'),'a')]",
+        "fg2VmName": "[concat(parameters('FortiGateNamePrefix'),'b')]",
+        "routeTableName": "DefaultRouteTable",
+        "routeTableId": "[resourceId('Microsoft.Network/routeTables',variables('routeTableName'))]",
+        "network_NIC_fg11_Name": "[concat(variables('fg1VmName'),'-ext-nic-01')]",
+        "network_NIC_fg11_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg11_Name'))]",
+        "network_NIC_fg12_Name": "[concat(variables('fg1VmName'),'-int-nic-01')]",
+        "network_NIC_fg12_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg12_Name'))]",
+        "network_NIC_fg21_Name": "[concat(variables('fg2VmName'),'-ext-nic-01')]",
+        "network_NIC_fg21_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg21_Name'))]",
+        "network_NIC_fg22_Name": "[concat(variables('fg2VmName'),'-int-nic-01')]",
+        "network_NIC_fg22_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg22_Name'))]",
+        "network_NIC_fg13_Name": "[concat(variables('fg1VmName'),'-hasync-nic-01')]",
+        "network_NIC_fg13_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg13_Name'))]",
+        "network_NIC_fg23_Name": "[concat(variables('fg2VmName'),'-hasync-nic-01')]",
+        "network_NIC_fg23_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg23_Name'))]",
+        "network_NIC_fg14_Name": "[concat(variables('fg1VmName'),'-mgmt-nic-01')]",
+        "network_NIC_fg14_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg14_Name'))]",
+        "network_NIC_fg24_Name": "[concat(variables('fg2VmName'),'-mgmt-nic-01')]",
+        "network_NIC_fg24_Id": "[resourceId('Microsoft.Network/networkInterfaces',variables('network_NIC_fg24_Name'))]",
+        "publicIPName": "eituksalzt1fw-pip-01",
+        "publicIPID": "[if(equals(parameters('publicIPNewOrExisting'),'new'),resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPName')),resourceId(parameters('publicIPResourceGroup'),'Microsoft.Network/publicIPAddresses',variables('publicIPName')))]",
+        "publicIP2Name": "eituksalzt1fwa-pip-01",
+        "publicIP2ID": "[if(equals(parameters('publicIP2NewOrExisting'),'new'),resourceId('Microsoft.Network/publicIPAddresses',variables('publicIP2Name')),resourceId(parameters('publicIP2ResourceGroup'),'Microsoft.Network/publicIPAddresses',variables('publicIP2Name')))]",
+        "publicIP3Name": "eituksalzt1fwb-pip-01",
+        "publicIP3ID": "[if(equals(parameters('publicIP3NewOrExisting'),'new'),resourceId('Microsoft.Network/publicIPAddresses',variables('publicIP3Name')),resourceId(parameters('publicIP3ResourceGroup'),'Microsoft.Network/publicIPAddresses',variables('publicIP3Name')))]",
+        "NSGName": "DefaultNSG",
+        "sn1IPArray": "[split(parameters('subnet1Prefix'),'.')]",
+        "sn1IPArray2ndString": "[string(variables('sn1IPArray')[3])]",
+        "sn1IPArray2nd": "[split(variables('sn1IPArray2ndString'),'/')]",
+        "sn1CIDRmask": "[string(int(variables('sn1IPArray2nd')[1]))]",
+        "sn1IPArray3": "[string(add(int(variables('sn1IPArray2nd')[0]),1))]",
+        "sn1IPArray2": "[string(int(variables('sn1IPArray')[2]))]",
+        "sn1IPArray1": "[string(int(variables('sn1IPArray')[1]))]",
+        "sn1IPArray0": "[string(int(variables('sn1IPArray')[0]))]",
+        "sn1GatewayIP": "[concat(variables('sn1IPArray0'),'.',variables('sn1IPArray1'),'.',variables('sn1IPArray2'),'.',variables('sn1IPArray3'))]",
+        "sn1IPfg1": "[concat(variables('sn1IPArray0'),'.',variables('sn1IPArray1'),'.',variables('sn1IPArray2'),'.',add(int(variables('sn1IPArray2nd')[0]),4))]",
+        "sn1IPfg2": "[concat(variables('sn1IPArray0'),'.',variables('sn1IPArray1'),'.',variables('sn1IPArray2'),'.',add(int(variables('sn1IPArray2nd')[0]),5))]",
+        "sn2IPArray": "[split(parameters('subnet2Prefix'),'.')]",
+        "sn2IPArray2ndString": "[string(variables('sn2IPArray')[3])]",
+        "sn2IPArray2nd": "[split(variables('sn2IPArray2ndString'),'/')]",
+        "sn2CIDRmask": "[string(int(variables('sn2IPArray2nd')[1]))]",
+        "sn2IPArray3": "[string(add(int(variables('sn2IPArray2nd')[0]),1))]",
+        "sn2IPArray2": "[string(int(variables('sn2IPArray')[2]))]",
+        "sn2IPArray1": "[string(int(variables('sn2IPArray')[1]))]",
+        "sn2IPArray0": "[string(int(variables('sn2IPArray')[0]))]",
+        "sn2GatewayIP": "[concat(variables('sn2IPArray0'),'.',variables('sn2IPArray1'),'.',variables('sn2IPArray2'),'.',variables('sn2IPArray3'))]",
+        "sn2IPlb": "[concat(variables('sn2IPArray0'),'.',variables('sn2IPArray1'),'.',variables('sn2IPArray2'),'.',add(int(variables('sn2IPArray2nd')[0]),36))]",
+        "sn2IPfg1": "[concat(variables('sn2IPArray0'),'.',variables('sn2IPArray1'),'.',variables('sn2IPArray2'),'.',add(int(variables('sn2IPArray2nd')[0]),4))]",
+        "sn2IPfg2": "[concat(variables('sn2IPArray0'),'.',variables('sn2IPArray1'),'.',variables('sn2IPArray2'),'.',add(int(variables('sn2IPArray2nd')[0]),5))]",
+        "sn3IPArray": "[split(parameters('subnet3Prefix'),'.')]",
+        "sn3IPArray2ndString": "[string(variables('sn3IPArray')[3])]",
+        "sn3IPArray2nd": "[split(variables('sn3IPArray2ndString'),'/')]",
+        "sn3CIDRmask": "[string(int(variables('sn3IPArray2nd')[1]))]",
+        "sn3IPArray3": "[string(add(int(variables('sn3IPArray2nd')[0]),1))]",
+        "sn3IPArray2": "[string(int(variables('sn3IPArray')[2]))]",
+        "sn3IPArray1": "[string(int(variables('sn3IPArray')[1]))]",
+        "sn3IPArray0": "[string(int(variables('sn3IPArray')[0]))]",
+        "sn3GatewayIP": "[concat(variables('sn3IPArray0'),'.',variables('sn3IPArray1'),'.',variables('sn3IPArray2'),'.',variables('sn3IPArray3'))]",
+        "sn3IPfg1": "[concat(variables('sn3IPArray0'),'.',variables('sn3IPArray1'),'.',variables('sn3IPArray2'),'.',add(int(variables('sn3IPArray2nd')[0]),4))]",
+        "sn3IPfg2": "[concat(variables('sn3IPArray0'),'.',variables('sn3IPArray1'),'.',variables('sn3IPArray2'),'.',add(int(variables('sn3IPArray2nd')[0]),5))]",
+        "sn4IPArray": "[split(parameters('subnet4Prefix'),'.')]",
+        "sn4IPArray2ndString": "[string(variables('sn4IPArray')[3])]",
+        "sn4IPArray2nd": "[split(variables('sn4IPArray2ndString'),'/')]",
+        "sn4CIDRmask": "[string(int(variables('sn4IPArray2nd')[1]))]",
+        "sn4IPArray3": "[string(add(int(variables('sn4IPArray2nd')[0]),1))]",
+        "sn4IPArray2": "[string(int(variables('sn4IPArray')[2]))]",
+        "sn4IPArray1": "[string(int(variables('sn4IPArray')[1]))]",
+        "sn4IPArray0": "[string(int(variables('sn4IPArray')[0]))]",
+        "sn4GatewayIP": "[concat(variables('sn4IPArray0'),'.',variables('sn4IPArray1'),'.',variables('sn4IPArray2'),'.',variables('sn4IPArray3'))]",
+        "sn4IPfg1": "[concat(variables('sn4IPArray0'),'.',variables('sn4IPArray1'),'.',variables('sn4IPArray2'),'.',add(int(variables('sn4IPArray2nd')[0]),4))]",
+        "sn4IPfg2": "[concat(variables('sn4IPArray0'),'.',variables('sn4IPArray1'),'.',variables('sn4IPArray2'),'.',add(int(variables('sn4IPArray2nd')[0]),5))]",
+        "internalLBName": "eit-uks-alz-t1fw-int-lb",
+        "internalLBId": "[resourceID('Microsoft.Network/loadBalancers',variables('internalLBName'))]",
+        "internalLBFEName": "[concat(parameters('FortiGateNamePrefix'),'-ilb-fe')]",
+        "internalLBFEId": "[concat(variables('internalLBId'),'/frontendIPConfigurations/',variables('internalLBFEName'))]",
+        "internalLBBEName": "[concat(parameters('FortiGateNamePrefix'),'-ilb-be')]",
+        "internalLBBEId": "[concat(variables('internalLBId'),'/backendAddressPools/',variables('internalLBBEName'))]",
+        "internalLBProbeName": "lb-probe-ilb",
+        "internalLBProbeId": "[concat(variables('internalLBId'),'/probes/',variables('internalLBProbeName'))]",
+        "externalLBName": "eit-uks-alz-t1fw-ext-lb",
+        "externalLBId": "[resourceId('Microsoft.Network/loadBalancers',variables('externalLBName'))]",
+        "externalLBFEName": "[concat(parameters('FortiGateNamePrefix'),'-elb-fe')]",
+        "externalLBFEId": "[concat(variables('externalLBId'),'/frontendIPConfigurations/',variables('externalLBFEName'))]",
+        "externalLBBEName": "[concat(parameters('FortiGateNamePrefix'),'-elb-be')]",
+        "externalLBBEId": "[concat(variables('externalLBId'),'/backendAddressPools/',variables('externalLBBEName'))]",
+        "externalLBProbeName": "lb-probe-elb",
+        "externalLBProbeId": "[concat(variables('externalLBId'),'/probes/',variables('externalLBProbeName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "[variables('resourceApiVersion')]",
+            "name": "pid-2dc4b447-552f-557f-b1cc-2faec6f9f133",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deplymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": []
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "apiVersion": "[variables('computeApiVersion')]",
+            "name": "[variables('compute_AvailabilitySet_FG_Name')]",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "Tier-1 Firewall Availability Set",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "sku": {
+                "name": "Aligned"
+            },
+            "properties": {
+                "platformFaultDomainCount": 2,
+                "platformUpdateDomainCount": 2
+            }
+        },
+        {
+            "type": "Microsoft.Network/routeTables",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('routeTableName')]",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "UDR",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "properties": {
+                "routes": [
+                    {
+                        "name": "toDefault",
+                        "properties": {
+                            "addressPrefix": "0.0.0.0/0",
+                            "nextHopType": "VirtualAppliance",
+                            "nextHopIPAddress": "[variables('sn2IPlb')]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('vnetName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/routeTables/', variables('routeTableName'))]"
+            ],
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetAddressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnet1Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnet1Prefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnet2Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnet2Prefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnet3Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnet3Prefix')]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnet4Name')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnet4Prefix')]"
+                        }
+                    }
+                ]
+            },
+            "condition": "[equals(parameters('vnetNewOrExisting'), 'new')]"
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('internalLBName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]"
+            ],
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "Tier-1 Firewall Internal LB",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "sku": {
+                "name": "Standard"
+            },
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "[variables('internalLBFEName')]",
+                        "properties": {
+                            "privateIPAddress": "[variables('sn2IPlb')]",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnet2Ref')]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "[variables('internalLBBEName')]"
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[variables('internalLBFEId')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[variables('internalLBBEId')]"
+                            },
+                            "probe": {
+                                "id": "[variables('internalLBProbeId')]"
+                            },
+                            "protocol": "all",
+                            "frontendPort": 0,
+                            "backendPort": 0,
+                            "enableFloatingIP": true,
+                            "idleTimeoutInMinutes": 5
+                        },
+                        "name": "lbruleFE2all"
+                    }
+                ],
+                "probes": [
+                    {
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 8008,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        },
+                        "name": "[variables('internalLBProbeName')]"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('NSGName')]",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "NSG",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "AllowAllInbound",
+                        "properties": {
+                            "description": "Allow all in",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound"
+                        }
+                    },
+                    {
+                        "name": "AllowAllOutbound",
+                        "properties": {
+                            "description": "Allow all out",
+                            "protocol": "*",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "*",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 105,
+                            "direction": "Outbound"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('publicIPName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard"
+            },
+            "properties": {
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
+            },
+            "condition": "[equals(parameters('publicIPNewOrExisting'), 'new')]"
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('publicIP2Name')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard"
+            },
+            "properties": {
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
+            },
+            "condition": "[equals(parameters('publicIP2NewOrExisting'), 'new')]"
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('publicIP3Name')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard"
+            },
+            "properties": {
+                "publicIPAllocationMethod": "[parameters('publicIPAddressType')]"
+            },
+            "condition": "[equals(parameters('publicIP3NewOrExisting'), 'new')]"
+        },
+        {
+            "type": "Microsoft.Network/loadBalancers",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('externalLBName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('publicIPID')]"
+            ],
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "Tier-1 Public LB",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "sku": {
+                "name": "Standard"
+            },
+            "properties": {
+                "frontendIPConfigurations": [
+                    {
+                        "name": "[variables('externalLBFEName')]",
+                        "properties": {
+                            "publicIPAddress": {
+                                "id": "[variables('publicIPID')]"
+                            }
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "[variables('externalLBBEName')]"
+                    }
+                ],
+                "loadBalancingRules": [
+                    {
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[variables('externalLBFEId')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[variables('externalLBBEId')]"
+                            },
+                            "probe": {
+                                "id": "[variables('externalLBProbeId')]"
+                            },
+                            "protocol": "Tcp",
+                            "frontendPort": 80,
+                            "backendPort": 80,
+                            "enableFloatingIP": true,
+                            "idleTimeoutInMinutes": 5
+                        },
+                        "name": "PublicLBRule-FE1-http"
+                    },
+                    {
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[variables('externalLBFEId')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[variables('externalLBBEId')]"
+                            },
+                            "probe": {
+                                "id": "[variables('externalLBProbeId')]"
+                            },
+                            "protocol": "Udp",
+                            "frontendPort": 10551,
+                            "backendPort": 10551,
+                            "enableFloatingIP": true,
+                            "idleTimeoutInMinutes": 5
+                        },
+                        "name": "PublicLBRule-FE1-udp10551"
+                    }
+                ],
+                "inboundNatRules": [],
+                "probes": [
+                    {
+                        "properties": {
+                            "protocol": "Tcp",
+                            "port": 8008,
+                            "intervalInSeconds": 5,
+                            "numberOfProbes": 2
+                        },
+                        "name": "[variables('externalLBProbeName')]"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg11_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]",
+                "[variables('externalLBId')]",
+                "[variables('NSGName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "[variables('sn1IPfg1')]",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnet1Ref')]"
+                            },
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[variables('externalLBBEId')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg21_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]",
+                "[variables('externalLBId')]",
+                "[variables('NSGName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAddress": "[variables('sn1IPfg2')]",
+                            "privateIPAllocationMethod": "Static",
+                            "subnet": {
+                                "id": "[variables('subnet1Ref')]"
+                            },
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[variables('externalLBBEId')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg12_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]",
+                "[variables('internalLBId')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('sn2IPfg1')]",
+                            "subnet": {
+                                "id": "[variables('subnet2Ref')]"
+                            },
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[variables('internalLBBEId')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg22_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]",
+                "[variables('internalLBId')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('sn2IPfg2')]",
+                            "subnet": {
+                                "id": "[variables('subnet2Ref')]"
+                            },
+                            "loadBalancerBackendAddressPools": [
+                                {
+                                    "id": "[variables('internalLBBEId')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg13_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('sn3IPfg1')]",
+                            "subnet": {
+                                "id": "[variables('subnet3Ref')]"
+                            }
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg23_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('sn3IPfg2')]",
+                            "subnet": {
+                                "id": "[variables('subnet3Ref')]"
+                            }
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg14_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('sn4IPfg1')]",
+                            "publicIPAddress": {
+                                "id": "[variables('publicIP2ID')]"
+                            },
+                            "subnet": {
+                                "id": "[variables('subnet4Ref')]"
+                            }
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[variables('networkApiVersion')]",
+            "name": "[variables('network_NIC_fg24_Name')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('vnetName')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('sn4IPfg2')]",
+                            "publicIPAddress": {
+                                "id": "[variables('publicIP3ID')]"
+                            },
+                            "subnet": {
+                                "id": "[variables('subnet4Ref')]"
+                            }
+                        }
+                    }
+                ],
+                "enableIPForwarding": true,
+                "enableAcceleratedNetworking": "[variables('acceleratedNetworking')]",
+                "networkSecurityGroup": {
+                    "id": "[resourceID('Microsoft.Network/networkSecurityGroups/',variables('NSGName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "[variables('computeApiVersion')]",
+            "name": "[variables('fg1VmName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('network_NIC_fg11_Name')]",
+                "[variables('network_NIC_fg12_Name')]",
+                "[variables('network_NIC_fg13_Name')]",
+                "[variables('network_NIC_fg14_Name')]"
+            ],
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "Tier-1 Firewall",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "plan": {
+                "name": "[parameters('FortiGateImageSKU')]",
+                "publisher": "fortinet",
+                "product": "fortinet_fortigate-vm_v5"
+            },
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('instanceType')]"
+                },
+                "availabilitySet": {
+                    "id": "[variables('compute_AvailabilitySet_FG_Id')]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('fg1VmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "customData": "[base64(concat('config system sdn-connector\nedit AzureSDN\nset type azure\nend\nconfig router static\n edit 1\n set gateway ', variables('sn1GatewayIP'), '\n set device port1\n next\n edit 2\n set dst ', parameters('vnetAddressPrefix'), '\n set gateway ', variables('sn2GatewayIP'), '\n set device port2\n next\n edit 3\nset dst 168.63.129.16 255.255.255.255\nset device port2\n set gateway ', variables ('sn2GatewayIP'), '\n next\nedit 4\nset dst 168.63.129.16 255.255.255.255\nset device port1\n set gateway ', variables ('sn1GatewayIP'), '\n next\n end\n config system probe-response\n set http-probe-value OK\n set mode http-probe\n end\n config system interface\n edit port1\n set mode static\n set ip ',  variables('sn1IPfg1'), '/', variables('sn1CIDRmask'), '\n set description external\n set allowaccess probe-response\n next\n edit port2\n set mode static\n set ip ', variables('sn2IPfg1'), '/', variables('sn2CIDRmask'), '\n set description internal\n set allowaccess probe-response\n next\n edit port3\n set mode static\n set ip ', variables('sn3IPfg1'), '/', variables('sn3CIDRmask'), '\n set description hasyncport\n next\n edit port4\n set mode static\n set ip ', variables('sn4IPfg1'), '/', variables('sn4CIDRmask'), '\n set description management\n set allowaccess ping https ssh ftm\n next\n end\n config system ha\n set group-name AzureHA\n set mode a-p\n set hbdev port3 100\n set session-pickup enable\n set session-pickup-connectionless enable\n set ha-mgmt-status enable\n config ha-mgmt-interfaces\n edit 1\n set interface port4\n set gateway ', variables('sn4GatewayIP'),'\n next\n end\n set override disable\n set priority 255\n set unicast-hb enable\n set unicast-hb-peerip ', variables('sn3IPfg2'), '\n end'))]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "fortinet",
+                        "offer": "fortinet_fortigate-vm_v5",
+                        "sku": "[parameters('FortiGateImageSKU')]",
+                        "version": "[parameters('FortigateImageVersion')]"
+                    },
+                    "osDisk": {
+                        "name": "[concat(variables('fg1VmName'),'-osdisk')]",
+                        "createOption": "FromImage"
+                    },
+                    "dataDisks": [
+                        {
+                            "name": "[concat(variables('fg1VmName'),'-datadisk-01')]",
+                            "diskSizeGB": 30,
+                            "lun": 0,
+                            "createOption": "Empty"
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "properties": {
+                                "primary": true
+                            },
+                            "id": "[variables('network_NIC_fg11_Id')]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[variables('network_NIC_fg12_Id')]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[variables('network_NIC_fg13_Id')]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[variables('network_NIC_fg14_Id')]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "[variables('computeApiVersion')]",
+            "name": "[variables('fg2VmName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('network_NIC_fg21_Name')]",
+                "[variables('network_NIC_fg22_Name')]",
+                "[variables('network_NIC_fg23_Name')]",
+                "[variables('network_NIC_fg24_Name')]"
+            ],
+            "tags": {
+                "Business Unit": "Finance",
+                "Major Function": "Enterprise IT",
+                "Cost Centre": "6C040714",
+                "Project Code": "TBC",
+                "Environment": "Live",
+                "Category": "Infrastructure",
+                "Service": "Security",
+                "Role": "Tier-1 Firewall",
+                "Service Level": "Gold",
+                "Owner": "TBC",
+                "Support": "TBC",
+                "ScheduledShutdown": "No",
+                "StartupPriority": "10"
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "plan": {
+                "name": "[parameters('FortiGateImageSKU')]",
+                "publisher": "fortinet",
+                "product": "fortinet_fortigate-vm_v5"
+            },
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('instanceType')]"
+                },
+                "availabilitySet": {
+                    "id": "[variables('compute_AvailabilitySet_FG_Id')]"
+                },
+                "osProfile": {
+                    "computerName": "[variables('fg2VmName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "customData": "[base64(concat('config system sdn-connector\nedit AzureSDN\nset type azure\nend\nend\nconfig router static\n edit 1\n set gateway ', variables('sn1GatewayIP'), '\n set device port1\n next\n edit 2\n set dst ', parameters('vnetAddressPrefix'), '\n set gateway ', variables('sn2GatewayIP'), '\n set device port2\n next\n edit 3\nset dst 168.63.129.16 255.255.255.255\nset device port2\n set gateway ', variables ('sn2GatewayIP'), '\n next\nedit 4\nset dst 168.63.129.16 255.255.255.255\nset device port1\n set gateway ', variables ('sn1GatewayIP'), '\n next\n end\n config system probe-response\n set http-probe-value OK\n set mode http-probe\n end\n config system interface\n edit port1\n set mode static\n set ip ', variables('sn1IPfg2'), '/', variables('sn1CIDRmask'), '\n set description external\n set allowaccess probe-response\n next\n edit port2\n set mode static\n set ip ', variables('sn2IPfg2'), '/', variables('sn2CIDRmask'), '\n set description internal\n set allowaccess probe-response\n next\n edit port3\n set mode static\n set ip ', variables('sn3IPfg2'), '/', variables('sn3CIDRmask'), '\n set description hasyncport\n next\n edit port4\n set mode static\n set ip ', variables('sn4IPfg2'), '/', variables('sn4CIDRmask'), '\n set description management\n set allowaccess ping https ssh ftm\n next\n end\n config system ha\n set group-name AzureHA\n set mode a-p\n set hbdev port3 100\n set session-pickup enable\n set session-pickup-connectionless enable\n set ha-mgmt-status enable\n config ha-mgmt-interfaces\n edit 1\n set interface port4\n set gateway ', variables('sn4GatewayIP'),'\n next\n end\n set override disable\n set priority 1\n set unicast-hb enable\n set unicast-hb-peerip ', variables('sn3IPfg1'), '\n end'))]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "fortinet",
+                        "offer": "fortinet_fortigate-vm_v5",
+                        "sku": "[parameters('FortiGateImageSKU')]",
+                        "version": "[parameters('FortigateImageVersion')]"
+                    },
+                    "osDisk": {
+                        "name": "[concat(variables('fg2VmName'),'-osdisk')]",
+                        "createOption": "FromImage"
+                    },
+                    "dataDisks": [
+                        {
+                            "name": "[concat(variables('fg2VmName'),'-datadisk-01')]",
+                            "diskSizeGB": 30,
+                            "lun": 0,
+                            "createOption": "Empty"
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "properties": {
+                                "primary": true
+                            },
+                            "id": "[variables('network_NIC_fg21_Id')]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[variables('network_NIC_fg22_Id')]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[variables('network_NIC_fg23_Id')]"
+                        },
+                        {
+                            "properties": {
+                                "primary": false
+                            },
+                            "id": "[variables('network_NIC_fg24_Id')]"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

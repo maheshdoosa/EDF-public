@@ -1,0 +1,12 @@
+---
+variables:
+  # Prod Configuration MDW
+  serviceConnectionName_production_dataapp: "data-prd-hs"
+  tfStateResourceGroupName_production_dataapp: ".terraformBootstrap"
+  tfStateStorageAccountName_production_dataapp: "avmgenprdhsmdwsub01tf"
+  tfStateContainerName_production_dataapp: "statefiles"
+  tfWorkingFolder_dataapp: "$(System.DefaultWorkingDirectory)/10_projects/05_DataStrategy/09_Iaas/09_Iaas_prd"
+  tfStateFile_production_dataapp: "data-prd-Iaas-02.tfstate"
+  envConfiguration_production_dataapp: "../../../../env/09_Iaas/52_data/09_Iaas_prd/03_prod.data.mgmt.tfvars"
+  agent_pool_production_dataapp: "vmss-ado-hs"
+  enable_apply_production_dataapp: false

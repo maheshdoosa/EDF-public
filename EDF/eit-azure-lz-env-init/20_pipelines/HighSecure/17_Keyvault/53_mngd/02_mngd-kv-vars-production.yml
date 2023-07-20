@@ -1,0 +1,23 @@
+---
+variables:
+  #mngdapp-prd (comsy)
+  serviceConnectionName_production_mngdapp: "gen-mngdhs-prd"
+  tfStateResourceGroupName_production_mngdapp: ".terraformBootstrap"
+  tfStateStorageAccountName_production_mngdapp: "avmgenprdhsmngdsub01tf"
+  tfStateContainerName_production_mngdapp: "statefiles"
+  tfWorkingFolder_mngdapp: "$(System.DefaultWorkingDirectory)/10_projects/08_ComsyHS/17_Keyvault_prd"
+  tfStateFile_production_mngdapp: "comsy-prd-kvHS.tfstate"
+  envConfiguration_production_mngdapp: "../../../env/17_Keyvault/53_mngd/03_prod.comsy.mgmt.tfvars"
+  agent_pool_production_mngdapp: "vmss-ado-hs"
+  enable_apply_production_mngdapp: false
+
+  #mngdHS-prd (06_ManagedHS)
+  serviceConnectionName_production_mngd: "eit-prd-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_production_mngd: ".terraformBootstrap"
+  tfStateStorageAccountName_production_mngd: "avmeitprdhsmngdsub01tf"
+  tfStateContainerName_production_mngd: "statefiles"
+  tfWorkingFolder_mngd: "$(System.DefaultWorkingDirectory)/10_projects/06_ManagedHS/17_Keyvault_prd"
+  tfStateFile_production_mngd: "eitmngd-prd-kvHS.tfstate"
+  envConfiguration_production_mngd: "../../../env/17_Keyvault/53_mngd/03_prod.eitmngd.mgmt.tfvars"
+  agent_pool_production_mngd: "vmss-ado-hs"
+  enable_apply_production_mngd: false

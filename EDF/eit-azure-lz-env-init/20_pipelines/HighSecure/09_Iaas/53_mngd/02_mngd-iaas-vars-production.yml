@@ -1,0 +1,23 @@
+---
+variables:
+  # mngdapp prd comsy
+  serviceConnectionName_production_mngdapp_prd: "gen-mngdhs-prd"
+  tfStateResourceGroupName_production_mngdapp_prd: ".terraformBootstrap"
+  tfStateStorageAccountName_production_mngdapp_prd: "avmgenprdhsmngdsub01tf"
+  tfStateContainerName_production_mngdapp_prd: "statefiles"
+  tfWorkingFolder_mngdapp_prd: "$(System.DefaultWorkingDirectory)/10_projects/08_ComsyHS/09_Iaas_prd"
+  tfStateFile_production_mngdapp_prd: "comsy-prd-iaasHS.tfstate"
+  envConfiguration_production_mngdapp_prd: "../../../env/09_Iaas/53_mngd/03_prod.comsy.mgmt.tfvars"
+  agent_pool_production_mngdapp_prd: "vmss-ado-hs"
+  enable_apply_production_mngdapp_prd: false
+
+  # mngdApex PRD
+  serviceConnectionName_production_mngdapex: "gen-mngdhs-prd"
+  tfStateResourceGroupName_production_mngdapex: ".terraformBootstrap"
+  tfStateStorageAccountName_production_mngdapex: "avmgenprdhsmngdsub01tf"
+  tfStateContainerName_production_mngdapex: "statefiles"
+  tfWorkingFolder_mngdapex_prd: "$(System.DefaultWorkingDirectory)/10_projects/11_ApexHS/09_Iaas_prd"
+  tfStateFile_production_mngdapex: "mngdapex-prd-iaasHS.tfstate"
+  envConfiguration_production_mngdapex: "../../../env/09_Iaas/53_mngd/03_prod.mngdapex.mgmt.tfvars"
+  agent_pool_production_mngdapex: "vmss-ado-hs"
+  enable_apply_production_mngdapex: true

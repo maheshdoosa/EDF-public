@@ -1,0 +1,13 @@
+---
+variables:
+  # control-m production
+  enable_production_controlm: true
+  teardownEnvironment_production_controlm: false
+
+  # control-m non-prod
+  enable_nonprod_controlm: true
+  teardownEnvironment_nonprod_controlm: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

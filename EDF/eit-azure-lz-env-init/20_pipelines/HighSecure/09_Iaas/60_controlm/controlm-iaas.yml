@@ -1,0 +1,93 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/15_ControlMHS/09_Iaas
+      - /10_projects/15_ControlMHS/09_Iaas_nprod
+      - /10_projects/15_ControlMHS/09_Iaas_sandpit
+      - /20_pipelines/HighSecure/09_Iaas/60_controlm
+      - /env/09_Iaas/60_controlm
+
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/15_ControlMHS/09_Iaas
+#       - /20_pipelines/HighSecure/09_Iaas/60_controlm
+#       - /env/09_Iaas/60_controlm
+
+# pool:
+#   name: "Ubuntu-Agents"
+
+variables:
+  - template: 01_controlm-Deployment.yml
+  - template: 02_controlm-iaas-vars-production.yml
+  - template: 03_controlm-iaas-vars-nonprod.yml
+  - template: 04_controlm-iaas-vars-sandpit.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+## Anything below should not be modified ##
+stages:
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      ####################### workload #####################################
+      ##Production
+      environment_name: "Productioncontrolm"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_controlm }}
+      stage_name: "Production_controlm"
+      deployment_jobname: "Deployment_Production_controlm"
+      teardown_jobname: "Teardown_Production_controlm"
+      teardown_environment: ${{ variables.teardownEnvironment_production_controlm }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_controlm }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_controlm }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_controlm }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_controlm }}
+      tf_statefile: ${{ variables.tfStateFile_production_controlm }}
+      env_configuration: ${{ variables.envConfiguration_production_controlm }}
+      enable_stage: ${{ variables.enable_production_controlm }}
+      agent_pool: ${{ variables.agent_pool_production_controlm }}
+      enable_apply: ${{ variables.enable_apply_production_controlm }}
+    # Control-m NonProd
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "nonprodcontrolm"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_nonprod_controlm }}
+      stage_name: "nonprod_controlm"
+      deployment_jobname: "Deployment_nonprod_controlm"
+      teardown_jobname: "Teardown_nonprod_controlm"
+      teardown_environment: ${{ variables.teardownEnvironment_nonprod_controlm }}
+      service_connectionname: ${{ variables.serviceConnectionName_nonprod_controlm }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_nonprod_controlm }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_nonprod_controlm }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_nonprod_controlm }}
+      tf_statefile: ${{ variables.tfStateFile_nonprod_controlm }}
+      env_configuration: ${{ variables.envConfiguration_nonprod_controlm }}
+      enable_stage: ${{ variables.enable_nonprod_controlm }}
+      agent_pool: ${{ variables.agent_pool_nonprod_controlm }}
+      enable_apply: ${{ variables.enable_apply_nonprod_controlm }}
+  # Control-m Sandpit
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "sandpitcontrolm"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_sandpit_controlm }}
+      stage_name: "sandpit_controlm"
+      deployment_jobname: "Deployment_sandpit_controlm"
+      teardown_jobname: "Teardown_sandpit_controlm"
+      teardown_environment: ${{ variables.teardownEnvironment_sandpit_controlm }}
+      service_connectionname: ${{ variables.serviceConnectionName_sandpit_controlm }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_sandpit_controlm }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_sandpit_controlm }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_sandpit_controlm }}
+      tf_statefile: ${{ variables.tfStateFile_sandpit_controlm }}
+      env_configuration: ${{ variables.envConfiguration_sandpit_controlm }}
+      enable_stage: ${{ variables.enable_sandpit_controlm }}
+      agent_pool: ${{ variables.agent_pool_sandpit_controlm }}
+      enable_apply: ${{ variables.enable_apply_sandpit_controlm }}

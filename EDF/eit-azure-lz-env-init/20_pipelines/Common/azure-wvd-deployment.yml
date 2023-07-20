@@ -1,0 +1,1158 @@
+parameters:
+    # Resource group section starts
+  - name: productionRGEnvironmentName
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdRG_SS
+    default: ""
+    type: string
+  - name: productionWvdRGStageNameSS
+    default: "Production_WVD_Resorcegroup_SS"
+    type: string
+  - name: teardownproductionWvdRGNameSS
+    default: "Teardown_production_WVD_Resourcegroup_SS"
+    type: string
+  - name: deploymentProductionWvdRGJobNameSS
+    default: "Deployment_Production_Wvd_RG_SS"
+    type: string
+  - name: teardownEnvironment_production_WVDRGSS
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDRGSS
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDRGSS
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDRGSS
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDRGSS
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDRGSS
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDRGSS
+    default: ""
+    type: string
+  - name: enable_production_WVDRGSS
+    default: false
+  - name: agent_pool_production_WVDRGSS
+    default: ""
+    type: string
+     # Resourcegroup section ends
+
+# Workspace section starts
+  - name: tfWorkingFolder_WvdWS_SS
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDWSSS
+    default: ""
+    type: string
+  - name: teardownEnvironment_production_WVDWSSS
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDWSSS
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDWSSS
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDWSSS
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDWSSS
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDWSSS
+    default: ""
+    type: string
+  - name: enable_production_WVDWSSS
+    default: false
+  - name: productionEnvironmentName
+    default: "Production"
+    type: string
+  - name: productionWvdWSStageNameSS
+    default: "Production_WVD_WorkSpace_SS"
+    type: string
+  - name: teardownproductionWvdWSNameSS
+    default: "Teardown_production_WVD_Workspace_SS"
+    type: string
+  - name: deploymentProductionWvdWSJobNameSS
+    default: "Deployment_Production_Wvd_WS_SS"
+    type: string
+  - name: agent_pool_production_WVDWSSS
+    default: ""
+    type: string
+  # Workspace section ends
+  # Hospool1 section starts
+  - name: productionWvdHPStageNameSS1
+    default: "Production_WVD_Hostpool_SS1"
+    type: string
+  - name: tfWorkingFolder_WvdHP1_SS
+    default: ""
+    type: string
+  - name: teardownproductionWvdHPNameSS1
+    default: "Teardown_production_WVD_Hostpool_SS1"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS1
+    default: "Deployment_Production_Wvd_HP_SS1"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS1
+    default: false
+    type: boolean
+  - name: tfStateFile_production_WVDHPSS1
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS1
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS1
+    default: false
+  - name: productionHPEnvironmentName1
+    default: "Production"
+    type: string
+  - name: serviceConnectionName_production_WVDHPSS1
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS1
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS1
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS1
+    default: ""
+    type: string
+  - name: agent_pool_production_WVDHPSS1
+    default: ""
+    type: string
+  # Hospool1 section ends
+  #Hostpool2 section starts
+  - name: productionHPEnvironmentName2
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP2_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS2
+    default: "Production_WVD_Hostpool_SS2"
+    type: string
+  - name: teardownproductionWvdHPNameSS2
+    default: "Teardown_production_WVD_Hostpool_SS2"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS2
+    default: "Deployment_Production_Wvd_HP_SS2"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS2
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS2
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS2
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS2
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS2
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS2
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS2
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS2
+    default: false
+  - name: agent_pool_production_WVDHPSS2
+    default: ""
+    type: string
+    #Hostpool2 section ends
+    # session host section starts
+  - name: productionSHEnvironmentName
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdSH_SS
+    default: ""
+    type: string
+  - name: productionWvdSHStageNameSS
+    default: "Production_WVD_SessionHostVM_SS"
+    type: string
+  - name: teardownproductionWvdSHNameSS
+    default: "Teardown_production_WVD_SessionHostVM_SS"
+    type: string
+  - name: deploymentProductionWvdSHJobNameSS
+    default: "Deployment_Production_Wvd_SH_SS"
+    type: string
+  - name: teardownEnvironment_production_WVDSHSS
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDSHSS
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDSHSS
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDSHSS
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDSHSS
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDSHSS
+    default: ""
+    type: string
+  - name: enable_production_WVDSHSS
+    default: false
+  - name: agent_pool_production_WVDSHSS
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDSHSS
+    default: ""
+    type: string
+# session host section ends
+    # Hostpool3 section starts
+  - name: productionHPEnvironmentName3
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP3_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS3
+    default: "Production_WVD_Hostpool_SS3"
+    type: string
+  - name: teardownproductionWvdHPNameSS3
+    default: "Teardown_production_WVD_Hostpool_SS3"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS3
+    default: "Deployment_Production_Wvd_HP_SS3"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS3
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS3
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS3
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS3
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS3
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS3
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS3
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS3
+    default: false
+  - name: agent_pool_production_WVDHPSS3
+    default: ""
+    type: string
+     # Hostpool3 section ends
+    # Hostpool4 section starts
+  - name: productionHPEnvironmentName4
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP4_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS4
+    default: "Production_WVD_Hostpool_SS4"
+    type: string
+  - name: teardownproductionWvdHPNameSS4
+    default: "Teardown_production_WVD_Hostpool_SS4"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS4
+    default: "Deployment_Production_Wvd_HP_SS4"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS4
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS4
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS4
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS4
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS4
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS4
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS4
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS4
+    default: false
+  - name: agent_pool_production_WVDHPSS4
+    default: ""
+    type: string
+     # Hostpool4 section ends
+    # Hostpool5 section starts
+  - name: productionHPEnvironmentName5
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP5_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS5
+    default: "Production_WVD_Hostpool_SS5"
+    type: string
+  - name: teardownproductionWvdHPNameSS5
+    default: "Teardown_production_WVD_Hostpool_SS5"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS5
+    default: "Deployment_Production_Wvd_HP_SS5"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS5
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS5
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS5
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS5
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS5
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS5
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS5
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS5
+    default: false
+  - name: agent_pool_production_WVDHPSS5
+    default: ""
+    type: string
+     # Hostpool5 section ends
+    # Hostpool6 section starts
+  - name: productionHPEnvironmentName6
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP6_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS6
+    default: "Production_WVD_Hostpool_SS6"
+    type: string
+  - name: teardownproductionWvdHPNameSS6
+    default: "Teardown_production_WVD_Hostpool_SS6"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS6
+    default: "Deployment_Production_Wvd_HP_SS6"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS6
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS6
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS6
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS6
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS6
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS6
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS6
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS6
+    default: false
+  - name: agent_pool_production_WVDHPSS6
+    default: ""
+    type: string
+     # Hostpool6 section ends
+
+         # Hostpool7 section starts
+  - name: productionHPEnvironmentName7
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP7_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS7
+    default: "Production_WVD_Hostpool_SS7"
+    type: string
+  - name: teardownproductionWvdHPNameSS7
+    default: "Teardown_production_WVD_Hostpool_SS7"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS7
+    default: "Deployment_Production_Wvd_HP_SS7"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS7
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS7
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS7
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS7
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS7
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS7
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS7
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS7
+    default: false
+  - name: agent_pool_production_WVDHPSS7
+    default: ""
+    type: string
+     # Hostpool7 section ends
+
+              # Hostpool8 section starts
+  - name: productionHPEnvironmentName8
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP8_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS8
+    default: "Production_WVD_Hostpool_SS8"
+    type: string
+  - name: teardownproductionWvdHPNameSS8
+    default: "Teardown_production_WVD_Hostpool_SS8"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS8
+    default: "Deployment_Production_Wvd_HP_SS8"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS8
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS8
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS8
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS8
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS8
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS8
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS8
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS8
+    default: false
+  - name: agent_pool_production_WVDHPSS8
+    default: ""
+    type: string
+     # Hostpool8 section ends
+
+   # Hostpool9 section starts
+  - name: productionHPEnvironmentName9
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP9_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS9
+    default: "Production_WVD_Hostpool_SS9"
+    type: string
+  - name: teardownproductionWvdHPNameSS9
+    default: "Teardown_production_WVD_Hostpool_SS9"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS9
+    default: "Deployment_Production_Wvd_HP_SS9"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS9
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS9
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS9
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS9
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS9
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS9
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS9
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS9
+    default: false
+  - name: agent_pool_production_WVDHPSS9
+    default: ""
+    type: string
+     # Hostpool9 section ends
+
+             # Hostpool10 section starts
+  - name: productionHPEnvironmentName10
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP10_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS10
+    default: "Production_WVD_Hostpool_SS10"
+    type: string
+  - name: teardownproductionWvdHPNameSS10
+    default: "Teardown_production_WVD_Hostpool_SS10"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS10
+    default: "Deployment_Production_Wvd_HP_SS10"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS10
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS10
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS10
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS10
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS10
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS10
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS10
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS10
+    default: false
+  - name: agent_pool_production_WVDHPSS10
+    default: ""
+    type: string
+     # Hostpool10 section ends
+
+             # Hostpool11 section starts
+  - name: productionHPEnvironmentName11
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP11_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS11
+    default: "Production_WVD_Hostpool_SS11"
+    type: string
+  - name: teardownproductionWvdHPNameSS11
+    default: "Teardown_production_WVD_Hostpool_SS11"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS11
+    default: "Deployment_Production_Wvd_HP_SS11"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS11
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS11
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS11
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS11
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS11
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS11
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS11
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS11
+    default: false
+  - name: agent_pool_production_WVDHPSS11
+    default: ""
+    type: string
+     # Hostpool11 section ends
+
+             # Hostpool12 section starts
+  - name: productionHPEnvironmentName12
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdHP12_SS
+    default: ""
+    type: string
+  - name: productionWvdHPStageNameSS12
+    default: "Production_WVD_Hostpool_SS12"
+    type: string
+  - name: teardownproductionWvdHPNameSS12
+    default: "Teardown_production_WVD_Hostpool_SS12"
+    type: string
+  - name: deploymentProductionWvdHPJobNameSS12
+    default: "Deployment_Production_Wvd_HP_SS12"
+    type: string
+  - name: teardownEnvironment_production_WVDHPSS12
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDHPSS12
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDHPSS12
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDHPSS12
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDHPSS12
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDHPSS12
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDHPSS12
+    default: ""
+    type: string
+  - name: enable_production_WVDHPSS12
+    default: false
+  - name: agent_pool_production_WVDHPSS12
+    default: ""
+    type: string
+     # Hostpool12 section ends
+
+    # session host 1 section starts
+  - name: productionSHEnvironmentName1
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdSH1_SS
+    default: ""
+    type: string
+  - name: productionWvdSHStageNameSS1
+    default: "Production_WVD_SessionHostVM_SS1"
+    type: string
+  - name: teardownproductionWvdSHNameSS1
+    default: "Teardown_production_WVD_SessionHostVM_SS1"
+    type: string
+  - name: deploymentProductionWvdSHJobNameSS1
+    default: "Deployment_Production_Wvd_SH_SS1"
+    type: string
+  - name: teardownEnvironment_production_WVDSHSS1
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDSHSS1
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDSHSS1
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDSHSS1
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDSHSS1
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDSHSS1
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDSHSS1
+    default: ""
+    type: string
+  - name: enable_production_WVDSHSS1
+    default: false
+  - name: agent_pool_production_WVDSHSS1
+    default: ""
+    type: string
+
+# session host 1 section ends
+
+# session host 2 section starts
+  - name: productionSHEnvironmentName2
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdSH2_SS
+    default: ""
+    type: string
+  - name: productionWvdSHStageNameSS2
+    default: "Production_WVD_SessionHostVM_SS2"
+    type: string
+  - name: teardownproductionWvdSHNameSS2
+    default: "Teardown_production_WVD_SessionHostVM_SS2"
+    type: string
+  - name: deploymentProductionWvdSHJobNameSS2
+    default: "Deployment_Production_Wvd_SH_SS2"
+    type: string
+  - name: teardownEnvironment_production_WVDSHSS2
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDSHSS2
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDSHSS2
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDSHSS2
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDSHSS2
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDSHSS2
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDSHSS2
+    default: ""
+    type: string
+  - name: enable_production_WVDSHSS2
+    default: false
+  - name: agent_pool_production_WVDSHSS2
+    default: ""
+    type: string
+# session host 2 section ends
+
+# session host 3 section starts
+  - name: productionSHEnvironmentName3
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdSH3_SS
+    default: ""
+    type: string
+  - name: productionWvdSHStageNameSS3
+    default: "Production_WVD_SessionHostVM_SS3"
+    type: string
+  - name: teardownproductionWvdSHNameSS3
+    default: "Teardown_production_WVD_SessionHostVM_SS3"
+    type: string
+  - name: deploymentProductionWvdSHJobNameSS3
+    default: "Deployment_Production_Wvd_SH_SS3"
+    type: string
+  - name: teardownEnvironment_production_WVDSHSS3
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDSHSS3
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDSHSS3
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDSHSS3
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDSHSS3
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDSHSS3
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDSHSS3
+    default: ""
+    type: string
+  - name: enable_production_WVDSHSS3
+    default: false
+  - name: agent_pool_production_WVDSHSS3
+    default: ""
+    type: string
+# session host 3 section ends
+
+# session host 4 section starts
+  - name: productionSHEnvironmentName4
+    default: "Production"
+    type: string
+  - name: tfWorkingFolder_WvdSH4_SS
+    default: ""
+    type: string
+  - name: productionWvdSHStageNameSS4
+    default: "Production_WVD_SessionHostVM_SS4"
+    type: string
+  - name: teardownproductionWvdSHNameSS4
+    default: "Teardown_production_WVD_SessionHostVM_SS4"
+    type: string
+  - name: deploymentProductionWvdSHJobNameSS4
+    default: "Deployment_Production_Wvd_SH_SS4"
+    type: string
+  - name: teardownEnvironment_production_WVDSHSS4
+    default: false
+    type: boolean
+  - name: serviceConnectionName_production_WVDSHSS4
+    default: ""
+    type: string
+  - name: tfStateResourceGroupName_production_WVDSHSS4
+    default: ""
+    type: string
+  - name: tfStateStorageAccountName_production_WVDSHSS4
+    default: ""
+    type: string
+  - name: tfStateContainerName_production_WVDSHSS4
+    default: ""
+    type: string
+  - name: tfStateFile_production_WVDSHSS4
+    default: ""
+    type: string
+  - name: envConfiguration_production_WVDSHSS4
+    default: ""
+    type: string
+  - name: enable_production_WVDSHSS4
+    default: false
+  - name: agent_pool_production_WVDSHSS4
+    default: ""
+    type: string
+# session host 4 section ends
+
+stages:
+  #Production-WVD-Iaas-resource group
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionRGEnvironmentName }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdRG_SS }}
+      stageName: ${{ parameters.productionWvdRGStageNameSS }}
+      teardownJobName: ${{ parameters.teardownproductionWvdRGNameSS }}
+      deploymentJobName: ${{ parameters.deploymentProductionWvdRGJobNameSS }}
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDRGSS }}
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDRGSS }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDRGSS }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDRGSS }} # WVD WS --> WVD workspace
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDRGSS }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDRGSS }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDRGSS }}
+      enable: ${{ parameters.enable_production_WVDRGSS }}
+      agentPool: ${{ parameters.agent_pool_production_WVDRGSS }}
+
+  #Production-WVD-Iaas workspace
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionEnvironmentName }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdWS_SS }}
+      stageName: ${{ parameters.productionWvdWSStageNameSS }}
+      teardownJobName: ${{ parameters.teardownproductionWvdWSNameSS }}
+      deploymentJobName: ${{ parameters.deploymentProductionWvdWSJobNameSS }}
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDWSSS }}
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDWSSS }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDWSSS }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDWSSS }} # WVD WS --> WVD workspace
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDWSSS }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDWSSS }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDWSSS }}
+      enable: ${{ parameters.enable_production_WVDWSSS }}
+      agentPool: ${{ parameters.agent_pool_production_WVDWSSS }}
+
+# WVD-IaaS hostpool1
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName1 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP1_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS1 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS1 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS1 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS1 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS1 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS1 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS1 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS1 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS1 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS1 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS1 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS1 }}
+
+# WVD-IaaS hostpool2 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName2 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP2_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS2 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS2 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS2 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS2 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS2 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS2 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS2 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS2 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS2 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS2 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS2 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS2 }}
+
+# WVD-IaaS hostpool3 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName3 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP3_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS3 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS3 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS3 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS3 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS3 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS3 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS3 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS3 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS3 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS3 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS3 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS3 }}
+
+# WVD-IaaS hostpool4 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName4 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP4_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS4 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS4 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS4 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS4 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS4 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS4 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS4 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS4 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS4 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS4 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS4 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS4 }}
+
+      # WVD-IaaS hostpool5 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName5 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP5_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS5 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS5 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS5 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS5 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS5 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS5 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS5 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS5 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS5 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS5 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS5 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS5 }}
+
+      # WVD-IaaS hostpool6 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName6 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP6_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS6 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS6 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS6 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS6 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS6 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS6 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS6 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS6 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS6 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS6 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS6 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS6 }}
+
+      # WVD-IaaS hostpool7 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName7 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP7_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS7 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS7 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS7 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS7 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS7 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS7 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS7 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS7 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS7 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS7 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS7 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS7 }}
+
+      # WVD-IaaS hostpool8 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName8 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP8_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS8 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS8 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS8 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS8 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS8 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS8 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS8 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS8 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS8 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS8 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS8 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS8 }}
+
+
+      # WVD-IaaS hostpool9 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName9 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP9_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS9 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS9 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS9 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS9 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS9 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS9 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS9 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS9 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS9 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS9 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS9 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS9 }}
+
+
+      # WVD-IaaS hostpool10 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName10 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP10_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS10 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS10 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS10 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS10 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS10 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS10 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS10 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS10 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS10 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS10 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS10 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS10 }}
+
+      # WVD-IaaS hostpool11 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName11 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP11_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS11 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS11 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS11 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS11 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS11 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS11 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS11 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS11 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS11 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS11 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS11 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS11 }}
+
+
+      # WVD-IaaS hostpool12 stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionHPEnvironmentName12 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdHP12_SS }} #done
+      stageName: ${{ parameters.productionWvdHPStageNameSS12 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdHPNameSS12 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdHPJobNameSS12 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDHPSS12 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDHPSS12 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDHPSS12 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDHPSS12 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDHPSS12 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDHPSS12 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDHPSS12 }} #done
+      enable: ${{ parameters.enable_production_WVDHPSS12 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDHPSS12 }}
+
+# WVD-IaaS Sessionhost VM for BPO HP stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionSHEnvironmentName1 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdSH1_SS }} #done
+      stageName: ${{ parameters.productionWvdSHStageNameSS1 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdSHNameSS1 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdSHJobNameSS1 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDSHSS1 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDSHSS1 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDSHSS1 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDSHSS1 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDSHSS1 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDSHSS1 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDSHSS1 }} #done
+      enable: ${{ parameters.enable_production_WVDSHSS1 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDSHSS1 }}
+
+# WVD-IaaS Sessionhost VM for PIT HP stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionSHEnvironmentName2 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdSH2_SS }} #done
+      stageName: ${{ parameters.productionWvdSHStageNameSS2 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdSHNameSS2 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdSHJobNameSS2 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDSHSS2 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDSHSS2 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDSHSS2 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDSHSS2 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDSHSS2 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDSHSS2 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDSHSS2 }} #done
+      enable: ${{ parameters.enable_production_WVDSHSS2 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDSHSS2 }}
+
+# WVD-IaaS Sessionhost VM for BPO-L HP stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionSHEnvironmentName3 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdSH3_SS }} #done
+      stageName: ${{ parameters.productionWvdSHStageNameSS3 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdSHNameSS3 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdSHJobNameSS3 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDSHSS3 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDSHSS3 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDSHSS3 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDSHSS3 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDSHSS3 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDSHSS3 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDSHSS3 }} #done
+      enable: ${{ parameters.enable_production_WVDSHSS3 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDSHSS3 }}
+
+# WVD-IaaS Sessionhost VM for PITL-HP stage
+  - template: ../azure-lz-core-new.yml
+    parameters:
+      environment: ${{ parameters.productionSHEnvironmentName4 }}
+      tfWorkingFolder: ${{ parameters.tfWorkingFolder_WvdSH4_SS }} #done
+      stageName: ${{ parameters.productionWvdSHStageNameSS4 }} #done
+      teardownJobName: ${{ parameters.teardownproductionWvdSHNameSS4 }} #done
+      deploymentJobName: ${{ parameters.deploymentProductionWvdSHJobNameSS4 }} #done
+      teardownEnvironment: ${{ parameters.teardownEnvironment_production_WVDSHSS4 }} #done
+      serviceConnectionName: ${{ parameters.serviceConnectionName_production_WVDSHSS4 }}
+      tfStateResourceGroupName: ${{ parameters.tfStateResourceGroupName_production_WVDSHSS4 }}
+      tfStateStorageAccountName: ${{ parameters.tfStateStorageAccountName_production_WVDSHSS4 }}
+      tfStateContainerName: ${{ parameters.tfStateContainerName_production_WVDSHSS4 }}
+      tfStateFile: ${{ parameters.tfStateFile_production_WVDSHSS4 }} #done
+      envConfiguration: ${{ parameters.envConfiguration_production_WVDSHSS4 }} #done
+      enable: ${{ parameters.enable_production_WVDSHSS4 }} #done
+      agentPool: ${{ parameters.agent_pool_production_WVDSHSS4 }}

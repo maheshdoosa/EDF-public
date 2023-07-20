@@ -1,0 +1,49 @@
+environment = "High Secured Managed"
+
+managedGenHSKvName   = "avmgentsthsmngdsub01kv"
+managedGenHSKvRgName = ".security"
+
+comsySQLPaaSRgName                 = "gen-uks-tst-hs-managed-comsy-rg-01"
+comsySQLPaaSResourceLocation       = "UK South"
+comsySQLServerName                 = "genukststhsqlsvr01"
+comsySqlServerVersion              = "12.0"
+comsySqlPrivateEndpointDecision    = "true"
+comsySqlDBNames                    = ["genukststhscomsydb01"]
+comsySqlDBMaxSize                  = "50"
+comsySqlDBSkuName                  = "S2"
+comsySqlDBZoneRedundantDecision    = "false"
+comsySqlDBFailoverDecision         = "false"
+comsySqlDBFailoverLocation         = "null"
+endpointFailoverPolicyModeDecision = "Automatic"
+privateEndpointSubnetName          = "gen-uks-tst-hs-comsy-snet-01"
+privateEndpointVNETName            = "gen-uks-tst-hs-managed-vnet-01"
+privateEndpointVNETRgName          = "gen-uks-tst-hs-managed-vnet-rg-01"
+comsySQLEndPointName               = "genukststhsqlsvr01-pe-01"
+privateEndpointSubResourceName     = ["sqlServer"]
+comsySQLServiceConnName            = "gen-uks-tst-hs-comsy-snet-01"
+privateEndpointConnectionEnabled   = "false" // updated
+comsySqldbname                     = "genukststhscomsydb01"
+azuread_authentication_only        = "false"
+sqldbazureadgroup                  = "GEN-TST-RBAC-SQLDB-AzAdmin"
+
+########## SQL database diag settings ##########
+categoryenabledtrue            = true
+categoryenabledfalse           = false
+retention_policy_enabled_true  = true
+retention_policy_enabled_false = false
+retention_policydays           = 90
+category1                      = "SQLSecurityAuditEvents"
+category2                      = "SQLInsights"
+category3                      = "Errors"
+category4                      = "AutomaticTuning"
+category5                      = "DatabaseWaitStatistics"
+category6                      = "Deadlocks"
+category7                      = "DevOpsOperationsAudit"
+category8                      = "Blocks"
+category9                      = "QueryStoreRuntimeStatistics"
+category10                     = "QueryStoreWaitStatistics"
+category11                     = "SQLInsights"
+category12                     = "Timeouts"
+category13                     = "Basic"
+category14                     = "InstanceAndAppAdvanced"
+category15                     = "WorkloadManagement"

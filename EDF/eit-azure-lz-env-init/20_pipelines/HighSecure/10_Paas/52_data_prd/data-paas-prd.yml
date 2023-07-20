@@ -1,0 +1,49 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/05_DataStrategy/10_Paas/10_Paas_prd
+      - /20_pipelines/HighSecure/10_Paas/52_data_prd
+      - /env/10_Paas/52_data/10_Paas_prd
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/05_DataStrategy/10_Paas/10_Paas_prd
+#       - /20_pipelines/HighSecure/10_Paas/52_data_prd
+#       - /env/10_Paas/52_data/10_Paas_prd
+
+# pool:
+#   name: "Ubuntu-Agents"
+
+variables:
+  - template: 01_data-Deployment.yml
+  - template: 02_data-paas-vars-production.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+# Anything below should not be modified ##
+stages:
+# MDW Production
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Productiondataapp"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_dataapp }}
+      stage_name: "Production_dataapp"
+      deployment_jobname: "Deployment_Production_dataapp"
+      teardown_jobname: "Teardown_Production_dataapp"
+      teardown_environment: ${{ variables.teardownEnvironment_production_dataapp }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_dataapp }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_dataapp }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_dataapp }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_dataapp }}
+      tf_statefile: ${{ variables.tfStateFile_production_dataapp }}
+      env_configuration: ${{ variables.envConfiguration_production_dataapp }}
+      enable_stage: ${{ variables.enable_production_dataapp }}
+      agent_pool: ${{ variables.agent_pool_production_dataapp }}
+      enable_apply: ${{ variables.enable_apply_production_dataapp }}

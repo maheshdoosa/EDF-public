@@ -1,0 +1,12 @@
+---
+variables:
+  # Prod config centralaudit
+  serviceConnectionName_production_cenadtapp: "az-lz-prod-centralaudit"
+  tfStateResourceGroupName_production_cenadtapp: ".terraformBootstrap"
+  tfStateStorageAccountName_production_cenadtapp: "avmeitalzhscenadtsub01tf"
+  tfStateContainerName_production_cenadtapp: "statefiles"
+  tfWorkingFolder_cenadtapp: "$(System.DefaultWorkingDirectory)/10_projects/07_CenAudit/09_Iaas"
+  tfStateFile_production_cenadtapp: "cenadt-prd-iaasHS.tfstate"
+  envConfiguration_production_cenadtapp: "../../../env/09_Iaas/54_cenadt/03_prod.cenadt.tfvars"
+  agent_pool_production_cenadtapp: "vmss-ado-hs"
+  enable_apply_production_cenadtapp: false

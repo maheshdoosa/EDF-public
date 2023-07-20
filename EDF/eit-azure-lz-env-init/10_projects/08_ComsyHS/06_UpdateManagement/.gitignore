@@ -1,0 +1,11 @@
+# ignore terraform statefiles
+*.tfstate*
+*.tfstate.*
+*.out
+*.json
+*.plan
+# except for in the bootstrap folder where we need to track the state here (and it contains no credentials)
+!00_bootstrap/terraform.*
+**/.terraform
+
+**/plan.out.json

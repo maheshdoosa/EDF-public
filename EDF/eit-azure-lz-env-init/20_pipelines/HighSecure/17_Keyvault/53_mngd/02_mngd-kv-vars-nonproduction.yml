@@ -1,0 +1,12 @@
+---
+variables:
+  #mngdHS-nonprd (06_ManagedHS)
+  serviceConnectionName_nonproduction_mngd: "eit-np-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_nonproduction_mngd: ".terraformBootstrap"
+  tfStateStorageAccountName_nonproduction_mngd: "avmeitnphsmngdsub01tf"
+  tfStateContainerName_nonproduction_mngd: "statefiles"
+  tfWorkingFolder_mngd: "$(System.DefaultWorkingDirectory)/10_projects/06_ManagedHS/17_Keyvault_nprd"
+  tfStateFile_nonproduction_mngd: "eitmngd-nonprd-kvHS.tfstate"
+  envConfiguration_nonproduction_mngd: "../../../env/17_Keyvault/53_mngd/02_np.eitmngd.mgmt.tfvars"
+  agent_pool_nonproduction_mngd: "vmss-ado-hs"
+  enable_apply_nonproduction_mngd: false

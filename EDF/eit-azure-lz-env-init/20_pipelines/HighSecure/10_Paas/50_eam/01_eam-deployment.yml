@@ -1,0 +1,21 @@
+---
+variables:
+  # eamapp test
+  enable_test_eamapp: false
+  teardownEnvironment_test_eamapp: false
+
+  # eamapp production
+  enable_production_eamapp: false
+  teardownEnvironment_production_eamapp: false
+
+  # eamci test
+  enable_test_eamci: false
+  teardownEnvironment_test_eamci: false
+
+  # eamci production
+  enable_production_eamci: false
+  teardownEnvironment_production_eamci: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210114"

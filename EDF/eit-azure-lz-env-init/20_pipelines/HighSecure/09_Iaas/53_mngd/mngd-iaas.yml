@@ -1,0 +1,152 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/08_ComsyHS/09_Iaas
+      - /10_projects/08_ComsyHS/09_Iaas_prd
+      - /10_projects/11_ApexHS/09_Iaas
+      - /10_projects/11_ApexHS/09_Iaas_prd
+      - /10_projects/11_ApexHS/09_Iaas_uat
+      - /10_projects/16_DataGatewayHS/09_Iaas
+      - /20_pipelines/HighSecure/09_Iaas/53_mngd
+      - /env/09_Iaas/53_mngd
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/08_ComsyHS/09_Iaas
+#       - /10_projects/08_ComsyHS/09_Iaas_prd
+#       - /10_projects/11_ApexHS/09_Iaas
+#       - /10_projects/11_ApexHS/09_Iaas_prd
+#       - /10_projects/11_ApexHS/09_Iaas_uat
+#       - /20_pipelines/HighSecure/09_Iaas/53_mngd
+#       - /10_projects/16_DataGatewayHS/09_Iaas
+#       - /env/09_Iaas/53_mngd
+
+variables:
+  - template: 01_mngd-Deployment.yml
+  - template: 02_mngd-iaas-vars-production.yml
+  - template: 03_mngd-iaas-vars-test.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+# Anything below should not be modified ##
+stages:
+# mngd tst
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Testmngdapp"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mngdapp }}
+      stage_name: "Test_mngdapp"
+      deployment_jobname: "Deployment_Test_mngdapp"
+      teardown_jobname: "Teardown_Test_mngdapp"
+      teardown_environment: ${{ variables.teardownEnvironment_test_mngdapp }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_mngdapp }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_mngdapp }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_mngdapp }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_mngdapp }}
+      tf_statefile: ${{ variables.tfStateFile_test_mngdapp }}
+      env_configuration: ${{ variables.envConfiguration_test_mngdapp }}
+      enable_stage: ${{ variables.enable_test_mngdapp }}
+      agent_pool: ${{ variables.agent_pool_test_mngdapp }}
+      enable_apply: ${{ variables.enable_apply_test_mngdapp }}
+  # mngdApex test & mngdApex Dev
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Testmngdapex"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mngdapex }}
+      stage_name: "Test_mngdapex"
+      deployment_jobname: "Deployment_Test_mngdapex"
+      teardown_jobname: "Teardown_Test_mngdapex"
+      teardown_environment: ${{ variables.teardownEnvironment_test_mngdapex }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_mngdapex }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_mngdapex }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_mngdapex }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_mngdapex }}
+      tf_statefile: ${{ variables.tfStateFile_test_mngdapex }}
+      env_configuration: ${{ variables.envConfiguration_test_mngdapex }}
+      enable_stage: ${{ variables.enable_test_mngdapex }}
+      agent_pool: ${{ variables.agent_pool_test_mngdapex }}
+      enable_apply: ${{ variables.enable_apply_test_mngdapex }}
+  # mngdApex Uat
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Testmngdapex_uat"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mngdapex_uat }}
+      stage_name: "Test_mngdapex_uat"
+      deployment_jobname: "Deployment_Test_mngdapex_uat"
+      teardown_jobname: "Teardown_Test_mngdapex_uat"
+      teardown_environment: ${{ variables.teardownEnvironment_test_mngdapex_uat }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_mngdapex_uat }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_mngdapex_uat }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_mngdapex_uat }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_mngdapex_uat }}
+      tf_statefile: ${{ variables.tfStateFile_test_mngdapex_uat }}
+      env_configuration: ${{ variables.envConfiguration_test_mngdapex_uat }}
+      enable_stage: ${{ variables.enable_test_mngdapex_uat }}
+      agent_pool: ${{ variables.agent_pool_test_mngdapex_uat }}
+      enable_apply: ${{ variables.enable_apply_test_mngdapex_uat }}
+  # Mngdapp Production Comsy
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Production_comsy_mngdapp"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mngdapp_prd }}
+      stage_name: "Comsy_Production_mngdapp"
+      deployment_jobname: "Deployment_Production_comsy_mngdapp"
+      teardown_jobname: "Teardown_Production_comsy_mngdapp"
+      teardown_environment: ${{ variables.teardownEnvironment_production_mngdapp_prd }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_mngdapp_prd }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_mngdapp_prd }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_mngdapp_prd }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_mngdapp_prd }}
+      tf_statefile: ${{ variables.tfStateFile_production_mngdapp_prd }}
+      env_configuration: ${{ variables.envConfiguration_production_mngdapp_prd }}
+      enable_stage: ${{ variables.enable_production_mngdapp_prd }}
+      agent_pool: ${{ variables.agent_pool_production_mngdapp_prd }}
+      enable_apply: ${{ variables.enable_apply_production_mngdapp_prd }}
+  # mngdApex PRD
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Production_Apex_mngdapp"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mngdapex_prd }}
+      stage_name: "Production_mngdApex"
+      deployment_jobname: "Deployment_Production_mngdApex"
+      teardown_jobname: "Teardown_Production_mngdApex"
+      teardown_environment: ${{ variables.teardownEnvironment_production_mngdapex }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_mngdapex }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_mngdapex }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_mngdapex }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_mngdapex }}
+      tf_statefile: ${{ variables.tfStateFile_production_mngdapex }}
+      env_configuration: ${{ variables.envConfiguration_production_mngdapex }}
+      enable_stage: ${{ variables.enable_production_mngdapex }}
+      agent_pool: ${{ variables.agent_pool_production_mngdapex }}
+      enable_apply: ${{ variables.enable_apply_production_mngdapex }}
+  # mngddtgw Dev
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Testmngddtgw"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mngddtgw }}
+      stage_name: "Test_mngddtgw"
+      deployment_jobname: "Deployment_Test_mngddtgw"
+      teardown_jobname: "Teardown_Test_mngddtgw"
+      teardown_environment: ${{ variables.teardownEnvironment_test_mngddtgw }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_mngddtgw }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_mngddtgw }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_mngddtgw }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_mngddtgw }}
+      tf_statefile: ${{ variables.tfStateFile_test_mngddtgw }}
+      env_configuration: ${{ variables.envConfiguration_test_mngddtgw }}
+      enable_stage: ${{ variables.enable_test_mngddtgw }}
+      agent_pool: ${{ variables.agent_pool_test_mngddtgw }}
+      enable_apply: ${{ variables.enable_apply_test_mngddtgw }}

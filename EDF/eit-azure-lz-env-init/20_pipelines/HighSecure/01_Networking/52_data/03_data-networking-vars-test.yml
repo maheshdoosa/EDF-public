@@ -1,0 +1,12 @@
+---
+variables:
+  # Test Configuration MDW
+  serviceConnectionName_test_dataapp: "data-dev-hs"
+  tfStateResourceGroupName_test_dataapp: ".terraformBootstrap"
+  tfStateStorageAccountName_test_dataapp: "avmgendevhsmdwsub01tf"
+  tfStateContainerName_test_dataapp: "statefiles"
+  tfWorkingFolder_tst_dataapp: "$(System.DefaultWorkingDirectory)/10_projects/05_DataStrategy/01_Networking_tst"
+  tfStateFile_test_dataapp: "data-dev-networking.tfstate"
+  envConfiguration_test_dataapp: "../../../env/01_Networking/52_data/02_test.data.mgmt.tfvars"
+  agent_pool_test_dataapp: "vmss-ado-hs"
+  enable_apply_test_dataapp: true

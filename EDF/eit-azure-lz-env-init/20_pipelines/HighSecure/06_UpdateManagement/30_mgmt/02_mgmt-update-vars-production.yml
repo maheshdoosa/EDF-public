@@ -1,0 +1,13 @@
+---
+variables:
+  # Prod config management
+  serviceConnectionName_production_management: "az-lz-prod-management-hs"
+  tfStateResourceGroupName_production_management: ".terraformBootstrap"
+  tfStateStorageAccountName_production_management: "tfstateprodmanagement"
+  tfStateContainerName_production_management: "statefiles"
+  tfWorkingFolder_management: "$(System.DefaultWorkingDirectory)/10_projects/01_Management/06_UpdateManagement"
+  # tfStateFile_production_management: "lzproduction-management-updatemanagement.tfstate"
+  tfStateFile_production_management: "testv11-lzprod-mgmt-updatemanagement.tfstate"
+  envConfiguration_production_management: "../../../env/06_UpdateManagement/03_production.management.tfvars"
+  agent_pool_production_management: "vmss-ado-hs"
+  enable_apply_production_management: false

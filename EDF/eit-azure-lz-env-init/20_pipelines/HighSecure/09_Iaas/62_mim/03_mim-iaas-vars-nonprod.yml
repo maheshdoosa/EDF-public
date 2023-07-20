@@ -1,0 +1,12 @@
+---
+variables:
+  # MIM NonProd
+  serviceConnectionName_nonprod_mim: "eit-np-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_nonprod_mim: ".terraformBootstrap"
+  tfStateStorageAccountName_nonprod_mim: "avmeitnphsmngdsub01tf"
+  tfStateContainerName_nonprod_mim: "statefiles"
+  tfWorkingFolder_nonprod_mim: "$(System.DefaultWorkingDirectory)/10_projects/18_MimHS/09_Iaas_nprod"
+  tfStateFile_nonprod_mim: "mim-nprd-iaas.tfstate"
+  envConfiguration_nonprod_mim: "../../../env/09_Iaas/62_mim/04_nprod.mim.mgmt.tfvars"
+  agent_pool_nonprod_mim: "vmss-ado-hs"
+  enable_apply_nonprod_mim: false

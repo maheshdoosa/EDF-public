@@ -1,0 +1,12 @@
+---
+variables:
+  # Prod config transit
+  serviceConnectionName_production_transit: "eit-prd-hs-multi-tenant-vnet-peer-armconnection"
+  tfStateResourceGroupName_production_transit: ".terraformBootstrap"
+  tfStateStorageAccountName_production_transit: "tfstateprodtransit"
+  tfStateContainerName_production_transit: "statefiles"
+  tfWorkingFolder_transit: "$(System.DefaultWorkingDirectory)/10_projects/02_Transit/18_Multi_tenant_peering"
+  tfStateFile_production_transit: "transit-multitenant.tfstate"
+  envConfiguration_production_transit: "../../../env/18_Multi_tenant_peering/03_production.transit.tfvars"
+  agent_pool_production_transit: "vmss-ado-hs"
+  enable_apply_production_transit: false

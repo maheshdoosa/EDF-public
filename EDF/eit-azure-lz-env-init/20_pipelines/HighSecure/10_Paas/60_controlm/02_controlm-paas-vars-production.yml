@@ -1,0 +1,10 @@
+variables:
+  serviceConnectionName_production_controlm: "eit-prd-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_production_controlm: ".terraformBootstrap"
+  tfStateStorageAccountName_production_controlm: "avmeitprdhsmngdsub01tf"
+  tfStateContainerName_production_controlm: "statefiles"
+  tfWorkingFolder_controlm: "$(System.DefaultWorkingDirectory)/10_projects/15_ControlMHS/10_Paas"
+  tfStateFile_production_controlm: "controlm-prd-paas.tfstate"
+  envConfiguration_production_controlm: "../../../env/10_Paas/60_controlm/03_prod.controlm.mgmt.tfvars"
+  agent_pool_production_controlm: "vmss-ado-hs"
+  enable_apply_production_controlm: false

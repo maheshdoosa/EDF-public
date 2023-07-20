@@ -1,0 +1,33 @@
+variables:
+  # mngdapp test
+  serviceConnectionName_test_mngdapp: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapp: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapp: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapp: "statefiles"
+  tfWorkingFolder_mngdapp:   "$(System.DefaultWorkingDirectory)/10_projects/08_ComsyHS/01_Networking"
+  tfStateFile_test_mngdapp: "mngd-test-networking.tfstate"
+  envConfiguration_test_mngdapp: "../../../env/01_Networking/53_mngd/02_test.mngd.mgmt.tfvars"
+  agent_pool_test_mngdapp: "vmss-ado-hs"
+  enable_apply_test_mngdapp: false
+
+  # mngdapex test
+  serviceConnectionName_test_mngdapex: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapex: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapex: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapex: "statefiles"
+  tfWorkingFolder_mngdapex: "$(System.DefaultWorkingDirectory)/10_projects/11_ApexHS/01_Networking"
+  tfStateFile_test_mngdapex: "mngdapex-test-networking.tfstate"
+  envConfiguration_test_mngdapex: "../../../env/01_Networking/53_mngd/02_test.mngdapex.mgmt.tfvars"
+  agent_pool_test_mngdapex: "vmss-ado-hs"
+  enable_apply_test_mngdapex: false
+
+  # mngdapex Uat
+  serviceConnectionName_test_mngdapex_uat: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapex_uat: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapex_uat: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapex_uat: "statefiles"
+  tfWorkingFolder_mngdapex_uat: "$(System.DefaultWorkingDirectory)/10_projects/11_ApexHS/01_Networking_uat"
+  tfStateFile_test_mngdapex_uat: "mngdapex-test-networking-uat.tfstate"
+  envConfiguration_test_mngdapex_uat: "../../../env/01_Networking/53_mngd/02_np.mngdapex.mgmt.uat.tfvars"
+  agent_pool_test_mngdapex_uat: "vmss-ado-hs"
+  enable_apply_test_mngdapex_uat: false

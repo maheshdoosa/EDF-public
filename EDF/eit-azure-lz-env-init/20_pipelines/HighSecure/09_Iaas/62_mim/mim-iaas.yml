@@ -1,0 +1,59 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/18_MimHS/09_Iaas_prod
+      - /10_projects/18_MimHS/09_Iaas_nprod
+      - /20_pipelines/HighSecure/09_Iaas/62_mim
+      - /env/09_Iaas/62_mim
+
+variables:
+  - template: 01_mim-Deployment.yml
+  - template: 02_mim-iaas-vars-production.yml
+  - template: 03_mim-iaas-vars-nonprod.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+## Anything below should not be modified ##
+stages:
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      ####################### workload #####################################
+      ##MIM-Production
+      environment_name: "MIM_Production"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_mim }}
+      stage_name: "MIM_Production"
+      deployment_jobname: "Deployment_Production_mim"
+      teardown_jobname: "Teardown_Production_mim"
+      teardown_environment: ${{ variables.teardownEnvironment_production_mim }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_mim }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_mim }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_mim }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_mim }}
+      tf_statefile: ${{ variables.tfStateFile_production_mim }}
+      env_configuration: ${{ variables.envConfiguration_production_mim }}
+      enable_stage: ${{ variables.enable_production_mim }}
+      agent_pool: ${{ variables.agent_pool_production_mim }}
+      enable_apply: ${{ variables.enable_apply_production_mim }}
+    # MIM Non-Prod
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "MIM_Nonprod"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_nonprod_mim }}
+      stage_name: "MIM_Nonprod"
+      deployment_jobname: "Deployment_nonprod_mim"
+      teardown_jobname: "Teardown_nonprod_mim"
+      teardown_environment: ${{ variables.teardownEnvironment_nonprod_mim }}
+      service_connectionname: ${{ variables.serviceConnectionName_nonprod_mim }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_nonprod_mim }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_nonprod_mim }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_nonprod_mim }}
+      tf_statefile: ${{ variables.tfStateFile_nonprod_mim }}
+      env_configuration: ${{ variables.envConfiguration_nonprod_mim }}
+      enable_stage: ${{ variables.enable_nonprod_mim }}
+      agent_pool: ${{ variables.agent_pool_nonprod_mim }}
+      enable_apply: ${{ variables.enable_apply_nonprod_mim }}

@@ -1,0 +1,12 @@
+---
+variables:
+  # Control-M NonPrd
+  serviceConnectionName_nonprod_controlm: "eit-np-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_nonprod_controlm: ".terraformBootstrap"
+  tfStateStorageAccountName_nonprod_controlm: "avmeitnphsmngdsub01tf"
+  tfStateContainerName_nonprod_controlm: "statefiles"
+  tfWorkingFolder_nonprod_controlm: "$(System.DefaultWorkingDirectory)/10_projects/15_ControlMHS/01_Networking_nprod"
+  tfStateFile_nonprod_controlm: "controlm-nprd-networking.tfstate"
+  envConfiguration_nonprod_controlm: "../../../env/01_Networking/60_controlm/04_nprod.controlm.mgmt.tfvars" #updated the value
+  agent_pool_nonprod_controlm: "vmss-ado-hs"
+  enable_apply_nonprod_controlm: true

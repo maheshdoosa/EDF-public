@@ -1,0 +1,2 @@
+variables:
+  branch_name: "refs/heads/production-hs"

@@ -1,0 +1,5 @@
+environment                  = "Sandpit"
+cenAuditLaRgName             = "jb-eit-uks-alz-sand-loga-rg3"
+cenAuditLaRgLocation         = "UK South"
+laWorkspaceName              = "eit-uks-alz-sand-loga-jb"
+cenAuditSentinelSolutionName = "SecurityInsights"

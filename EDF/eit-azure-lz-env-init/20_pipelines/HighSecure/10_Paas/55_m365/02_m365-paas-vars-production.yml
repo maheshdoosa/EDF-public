@@ -1,0 +1,12 @@
+---
+variables:
+  # Prod config m365
+  serviceConnectionName_production_m365: "eit-prd-hs-m365auto-sub-armconnection"
+  tfStateResourceGroupName_production_m365: ".terraformBootstrap"
+  tfStateStorageAccountName_production_m365: "avmeitprdhsm365autosubtf"
+  tfStateContainerName_production_m365: "statefiles"
+  tfWorkingFolder_m365: "$(System.DefaultWorkingDirectory)/10_projects/09_M365HS/10_Paas"
+  tfStateFile_production_m365: "m365-paas.tfstate"
+  envConfiguration_production_m365: "../../../env/10_Paas/55_m365/03_prod.m365HS.tfvars"
+  agent_pool_production_m365: "vmss-ado-hs"
+  enable_apply_production_m365: false

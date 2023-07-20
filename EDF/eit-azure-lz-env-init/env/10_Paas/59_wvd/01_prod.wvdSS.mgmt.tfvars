@@ -1,0 +1,39 @@
+environment      = "Standard Secured Managed"
+ResourceLocation = "uksouth"
+SSKvName         = "avmeitprdsswvdsub01kv"
+KvRgName         = ".security"
+
+vmDiagSA                     = "eituksprdssvmlogssa01"
+VmLogsRgName                 = "eit-uks-prd-ss-vmlogs-rg-01"
+vmDiagSA_accounttier         = "standard"
+vmDiagSA_storagetype         = "StorageV2"
+vmDiagSA_accountreptype      = "LRS"
+vmDiagSA_tlsversion          = "TLS1_2"
+vmDiagSA_accesstier          = "Hot"
+vmDiagSA_httpstraffic        = "true"
+vmDiagSA_publicaccess        = "false"
+vmDiagSA_hnsenable           = "false"
+vmDiagSA_nfsv3               = "false"
+vmDiagSA_largefileshare      = "false"
+vmDiagSA_blobsoftdelete      = "90"
+vmDiagSA_containersoftdelete = "90"
+vmDiagSA_sharesoftdelete     = "90"
+vmDiagSA_acl                 = "Deny"
+vmDiagSA_bypass              = ["AzureServices"]
+vmDiagSA_routing             = "MicrosoftRouting"
+vmDiagSA_publishinternet     = "false"
+vmDiagSA_publishmicrosoft    = "false"
+#################### KV ################################
+
+ade_keyvault_name                 = "eit-uks-prd-ss-ade-kv-01"
+resource_Location                 = "uk south"
+ade_kv_resource_group_name        = "eit-uks-prd-ss-ade-rg-01"
+sku_name_adekv                    = "standard" // standard or premium HSM
+enabled_for_deployment_adekv      = "false"    //true or false
+enabled_for_disk_encryption_adekv = "true"     //true or false
+enabled_for_template_deployment   = "false"    //true or false
+soft_delete_retention_days        = "90"
+purge_protection_enabled          = "false" //setting it as false due to issue in vm deletion
+diagnosticsetting_name            = "keyVault-diagnostics"
+default_action                    = "Deny"          //Allow will enable access to all networks
+bypass                            = "AzureServices" //none

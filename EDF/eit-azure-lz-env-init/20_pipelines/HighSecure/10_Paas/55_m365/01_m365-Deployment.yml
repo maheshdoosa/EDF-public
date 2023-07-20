@@ -1,0 +1,9 @@
+---
+variables:
+  # m365 production
+  enable_production_m365: true
+  teardownEnvironment_production_m365: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

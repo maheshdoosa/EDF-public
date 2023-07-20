@@ -1,0 +1,11 @@
+---
+variables:
+  serviceConnectionName_production_snowmid: "gen-snowmidhs-prd"
+  tfStateResourceGroupName_production_snowmid: ".terraformBootstrap"
+  tfStateStorageAccountName_production_snowmid: "avmeitalzhssecgovsub01tf"
+  tfStateContainerName_production_snowmid: "statefiles"
+  tfWorkingFolder_snowmid:   "$(System.DefaultWorkingDirectory)/10_projects/10_SnowMidHS/17_Keyvault"
+  tfStateFile_production_snowmid: "snowmid-prd-kv01.tfstate"
+  envConfiguration_production_snowmid: "../../../env/17_Keyvault/56_snowmid/03_prod.snowmid.mgmt.tfvars" #updated the value
+  agent_pool_production_snowmid: "vmss-ado-hs"
+  enable_apply_production_snowmid: false

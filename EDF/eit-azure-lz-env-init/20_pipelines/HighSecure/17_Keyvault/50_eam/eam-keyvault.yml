@@ -1,0 +1,117 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/03_EamApp/17_Keyvault
+      - /10_projects/03_EamApp/17_Keyvault_tst
+      - /10_projects/03_EamCi/17_Keyvault
+      -  /10_projects/03_EamCi/17_Keyvault_tst
+      - /20_pipelines/HighSecure/17_Keyvault/50_eam
+      - /env/17_Keyvault/50_eam
+
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/03_EamApp/17_Keyvault
+#       - /10_projects/03_EamApp/17_Keyvault_tst
+#       - /10_projects/03_EamCi/17_Keyvault
+#       - /10_projects/03_EamCi/17_Keyvault_tst
+#       - /20_pipelines/HighSecure/17_Keyvault/50_eam
+#       - /env/17_Keyvault/50_eam
+
+variables:
+  - template: 01_eam-deployment.yml
+  - template: 03_eam-keyvault-vars-test.yml
+  - template: 02_eam-keyvault-vars-production.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+
+## Anything below should not be modified ##
+stages:
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      ####################### workload #####################################
+      ##test
+      environment_name: "TestEam"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_eamapp }}
+      stage_name: "Test_EamApp"
+      deployment_jobname: "Deployment_Test_EamApp"
+      teardown_jobname: "Teardown_Test_EamApp"
+      teardown_environment: ${{ variables.teardownEnvironment_test_eamapp }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_eamapp }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_eamapp }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_eamapp }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_eamapp }}
+      tf_statefile: ${{ variables.tfStateFile_test_eamapp }}
+      env_configuration: ${{ variables.envConfiguration_test_eamapp }}
+      enable_stage: ${{ variables.enable_test_eamapp }}
+      agent_pool: ${{ variables.agent_pool_test_eamapp }}
+      enable_apply: ${{ variables.enable_apply_test_eamapp }}
+
+    ##Production
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "ProductionEam"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_eamapp }}
+      stage_name: "Production_EamApp"
+      deployment_jobname: "Deployment_Production_EamApp"
+      teardown_jobname: "Teardown_Production_EamApp"
+      teardown_environment: ${{ variables.teardownEnvironment_production_eamapp }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_eamapp }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_eamapp }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_eamapp }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_eamapp }}
+      tf_statefile: ${{ variables.tfStateFile_production_eamapp }}
+      env_configuration: ${{ variables.envConfiguration_production_eamapp }}
+      enable_stage: ${{ variables.enable_production_eamapp }}
+      agent_pool: ${{ variables.agent_pool_production_eamapp }}
+      enable_apply: ${{ variables.enable_apply_production_eamapp }}
+
+      ####################### CI #####################################
+      ##test
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "TestEamCI"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_eamci }}
+      stage_name: "Test_EamCi"
+      deployment_jobname: "Deployment_Test_EamCi"
+      teardown_jobname : "Teardown_Test_EamCi"
+      teardown_environment: ${{ variables.teardownEnvironment_test_eamci }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_eamci }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_eamci }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_eamci }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_eamci }}
+      tf_statefile: ${{ variables.tfStateFile_test_eamci }}
+      env_configuration: ${{ variables.envConfiguration_test_eamci }}
+      enable_stage: ${{ variables.enable_test_eamci }}
+      agent_pool: ${{ variables.agent_pool_test_eamci }}
+      enable_apply: ${{ variables.enable_apply_test_eamci }}
+
+      ##Production
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "TestEamCI"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_eamci }}
+      stage_name: "Production_EamCi"
+      deployment_jobname: "Deployment_Production_EamCi"
+      teardown_jobname: "Teardown_Production_EamCi"
+      teardown_environment: ${{ variables.teardownEnvironment_production_eamci }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_eamci }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_eamci }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_eamci }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_eamci }}
+      tf_statefile: ${{ variables.tfStateFile_production_eamci }}
+      env_configuration: ${{ variables.envConfiguration_production_eamci }}
+      enable_stage: ${{ variables.enable_production_eamci }}
+      agent_pool: ${{ variables.agent_pool_production_eamci }}
+      enable_apply: ${{ variables.enable_apply_production_eamci }}

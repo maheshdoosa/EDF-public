@@ -1,0 +1,11 @@
+---
+variables:
+  serviceConnectionName_production_nuclear: "gen-mngdhs-prd"
+  tfStateResourceGroupName_production_nuclear: ".terraformBootstrap"
+  tfStateStorageAccountName_production_nuclear: "avmgenprdhsmngdsub01tf"
+  tfStateContainerName_production_nuclear: "statefiles"
+  tfWorkingFolder_nuclear: "$(System.DefaultWorkingDirectory)/10_projects/17_NuclearRnDHS/09_Iaas_prd"
+  tfStateFile_production_nuclear: "nuclear-prd-iaas.tfstate"
+  envConfiguration_production_nuclear: "../../../env/09_Iaas/61_nuclear/03_prod.nuclear.mgmt.tfvars"
+  agent_pool_production_nuclear: "vmss-ado-hs"
+  enable_apply_production_nuclear: false

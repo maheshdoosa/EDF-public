@@ -1,0 +1,11 @@
+---
+variables:
+  serviceConnectionName_production_eamapp: "eam-prod-app"
+  tfStateResourceGroupName_production_eamapp: ".terraformBootstrap"
+  tfStateStorageAccountName_production_eamapp: "avmgenprdhswkloadsub01tf"
+  tfStateContainerName_production_eamapp: "statefiles"
+  tfWorkingFolder_eamapp: "$(System.DefaultWorkingDirectory)/10_projects/03_EamApp/07_Policies"
+  tfStateFile_production_eamapp: "eamapp-production-policies.tfstate"
+  envConfiguration_production_eamapp: "../../../env/07_Policies/50_eam/05_production.eamapp.tfvars"
+  agent_pool_production_eamapp: "vmss-ado-hs"
+  enable_apply_production_eamapp: false

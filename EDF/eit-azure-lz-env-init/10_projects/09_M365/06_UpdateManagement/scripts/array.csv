@@ -1,0 +1,10 @@
+#TYPE System.Management.Automation.PSCustomObject,,,,,,,
+ScheduleName,Reboot,OS,DayofWeek,TagName,TagValue,StartTime,DaysofWeekOccurrence
+1st Monday UTC0 - Windows Update,IfRequired,Windows,Monday,UpdateWindow,MON1UTC0,21:00,First
+1st Monday UTC0 - Linux Update,IfRequired,Linux,Monday,UpdateWindow,MON1UTC0,21:00,First
+2nd Monday UTC0 - Windows Update,IfRequired,Windows,Monday,UpdateWindow,MON2UTC0,21:00,Second
+2nd Monday UTC0 - Linux Update,IfRequired,Linux,Monday,UpdateWindow,MON2UTC0,21:00,Second
+3rd Monday UTC0 - Windows Update,IfRequired,Windows,Monday,UpdateWindow,MON3UTC0,21:00,Third
+3rd Monday UTC0 - Linux Update,IfRequired,Linux,Monday,UpdateWindow,MON3UTC0,21:00,Third
+3rd Saturday UTC16 - Windows Update - No Reboot,Never,Windows,Saturday,UpdateWindow,SAT3UTC16-NR,16:00,Third
+3rd Saturday UTC16 - Linux Update - No Reboot,Never,Linux,Saturday,UpdateWindow,SAT3UTC16-NR,16:00,Third

@@ -1,0 +1,25 @@
+---
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: "/10_projects"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    reviewers:
+      - CrowersEDF
+      - jamieb101
+      - samtarplee
+  - package-ecosystem: npm
+    directory: "/10_projects"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    reviewers:
+      - CrowersEDF
+      - jamieb101
+      - samtarplee
+    ignore:
+      - dependency-name: serverless
+        versions:
+          - ">= 2.a, < 3"

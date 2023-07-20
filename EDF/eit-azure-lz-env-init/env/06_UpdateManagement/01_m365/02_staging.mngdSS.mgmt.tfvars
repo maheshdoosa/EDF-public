@@ -1,0 +1,7 @@
+environment               = "Staging"
+updateManagmentRgName     = "eit-uks-prd-ss-m365-rg"
+updateManagmentRgLocation = "UK South"
+laWorkspacename           = "eit-uks-alz-ss-loga-01"
+laWorkspaceSku            = "Free"
+automationAccountName     = "eit-uks-prd-m365-aa-01"
+automationAccountSku      = "Basic"

@@ -1,0 +1,17 @@
+---
+variables:
+  # Gendiamond Lower
+  serviceConnectionName_lower_gendiamond: "gen-lwr-hs-wkload"
+  tfStateResourceGroupName_lower_gendiamond: ".terraformBootstrap"
+  tfStateStorageAccountName_lower_gendiamond: "avmgenlwrhswkloadsub01tf"
+  tfStateContainerName_lower_gendiamond: "statefiles"
+  tfStateFile_lower_gendiamond: "gendiamond-lower-networking.tfstate"
+  tfWorkingFolder_lower_gendiamond:   "$(System.DefaultWorkingDirectory)/10_projects/14_GenDiamondHS/01_Networking_lower"
+  envConfiguration_lower_gendiamond: "../../../env/01_Networking/59_gendiamond/02_gendiamondhs.lower.mgmt.tfvars"
+  agent_pool_lower_gendiamond: "vmss-ado-hs"
+  enable_apply_lower_gendiamond: true
+
+  ###########
+  enable_import: false
+  # import_module_name: '"azurerm_subnet.subnets[\"AzureBastionSubnet\"]"'
+  # ResourceID: "resourceGroups/gen-uks-tb-hs-wkload-vnet-rg-01/providers/Microsoft.Network/virtualNetworks/gen-uks-tb-hs-wkload-vnet-01/subnets/AzureBastionSubnet"

@@ -1,0 +1,12 @@
+---
+variables:
+  # Prod Configuration MDW
+  serviceConnectionName_production_dataapp: "data-prd-hs"
+  tfStateResourceGroupName_production_dataapp: ".terraformBootstrap"
+  tfStateStorageAccountName_production_dataapp: "avmgenprdhsmdwsub01tf"
+  tfStateContainerName_production_dataapp: "statefiles"
+  tfWorkingFolder_dataapp: "$(System.DefaultWorkingDirectory)/10_projects/05_DataStrategy/17_Keyvault/17_Keyvault_prd"
+  tfStateFile_production_dataapp: "data-prd-kv.tfstate"
+  envConfiguration_production_dataapp: "../../../../env/17_Keyvault/52_data/17_Keyvault_prd/03_prod.data.mgmt.tfvars"
+  agent_pool_production_dataapp: "vmss-ado-hs"
+  enable_apply_production_dataapp: false

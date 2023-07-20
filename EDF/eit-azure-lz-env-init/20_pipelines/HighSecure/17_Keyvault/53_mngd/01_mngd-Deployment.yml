@@ -1,0 +1,25 @@
+---
+variables:
+  # mngdapp test  # Its contain the common networking files so AVM KV also keep on here
+  enable_test_mngdapp: false
+  teardownEnvironment_test_mngdapp: false
+
+  # mngddtgw dev
+  enable_test_mngddtgw: false
+  teardownEnvironment_test_mngddtgw: false
+
+  # mngdapp production
+  enable_production_mngdapp: false
+  teardownEnvironment_production_mngdapp: false
+
+  # mngdHS production (06_managedHS)
+  enable_production_mngd: false
+  teardownEnvironment_production_mngd: false
+
+  # mngdHS non-production (06_managedHS)
+  enable_nonproduction_mngd: false
+  teardownEnvironment_nonproduction_mngd: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

@@ -1,0 +1,48 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/02_Transit/10_Paas
+      - /20_pipelines/HighSecure/10_Paas/20_transit
+      - /env/10_Paas/04_production.transit.tfvars
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/02_Transit/10_Paas
+#       - /20_pipelines/HighSecure/10_Paas/20_transit
+#       - /env/10_Paas/04_production.transit.tfvars
+
+
+variables:
+  - template: 01_transit_deployment.yml
+  - template: 02_transit_paas_vars_production.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+# Anything below should not be modified ##
+
+# Transit Production
+stages:
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Transit_Production"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_transit }}
+      stage_name: "Production_transit"
+      deployment_jobname: "Deployment_Production_transit"
+      teardown_jobname: "Teardown_Production_transit"
+      teardown_environment: ${{ variables.teardownEnvironment_production_transit }}
+      service_connectionname: ${{ variables.serviceConnectionName_production_transit }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_production_transit }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_production_transit }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_production_transit }}
+      tf_statefile: ${{ variables.tfStateFile_production_transit }}
+      env_configuration: ${{ variables.envConfiguration_production_transit }}
+      enable_stage: ${{ variables.enable_production_transit }}
+      agent_pool: ${{ variables.agent_pool_production_transit }}
+      enable_apply: ${{ variables.enable_apply_production_transit }}

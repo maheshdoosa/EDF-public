@@ -1,0 +1,13 @@
+---
+variables:
+  # MIM Production
+  enable_production_mim: false
+  teardownEnvironment_production_mim: false
+
+  # MIM Non-Prod
+  enable_nonprod_mim: false
+  teardownEnvironment_nonprod_mim: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

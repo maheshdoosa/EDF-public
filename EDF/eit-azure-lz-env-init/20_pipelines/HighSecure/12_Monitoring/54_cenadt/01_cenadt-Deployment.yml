@@ -1,0 +1,9 @@
+---
+variables:
+  # cenadtapp production
+  enable_production_cenadtapp: false
+  teardownEnvironment_production_cenadtapp: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

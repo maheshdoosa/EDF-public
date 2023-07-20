@@ -1,0 +1,36 @@
+#############################
+#    P A R A M E T E R S    #
+#############################
+
+---
+parameters:
+  - name: apikey
+    type: string
+    default: ''
+  - name: enrollmentid
+    type: string
+    default: ''
+
+
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+#############################
+#         S T E P S         #
+#############################
+
+steps:
+- task: Bash@3
+  inputs:
+    filePath: '$(System.DefaultWorkingDirectory)/20_pipelines/HighSecure/25_Cloudability/cloudability.sh'
+    arguments: '${{ parameters.apikey }} ${{ parameters.enrollmentid }}'
+
+- task: PublishPipelineArtifact@1
+  displayName: Publish Artifacts
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/result_cloudability.txt'
+    artifact: 'drop'
+    publishLocation: 'pipeline'

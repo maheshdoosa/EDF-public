@@ -1,0 +1,9 @@
+---
+variables:
+  # dataapp test
+  enable_test_dataapp: false
+  teardownEnvironment_test_dataapp: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

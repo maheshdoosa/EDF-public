@@ -1,0 +1,23 @@
+---
+variables:
+  # Test config eamapp
+  serviceConnectionName_test_eamapp: "eam-test-app"
+  tfStateResourceGroupName_test_eamapp: ".terraformBootstrap"
+  tfStateStorageAccountName_test_eamapp: "avmgentsthswkloadsub01tf"
+  tfStateContainerName_test_eamapp: "statefiles"
+  tfWorkingFolder_test_eamapp: "$(System.DefaultWorkingDirectory)/10_projects/03_EamApp/10_Paas_tst"
+  tfStateFile_test_eamapp: "eamapp-test-paas.tfstate"
+  envConfiguration_test_eamapp: "../../../env/10_Paas/50_eam/05_test.eamapp.tfvars"
+  agent_pool_test_eamapp: "vmss-ado-hs"
+  enable_apply_test_eamapp: false
+
+  # Test config eamappci
+  serviceConnectionName_test_eamci: 'eam-test-ci'
+  tfStateResourceGroupName_test_eamci: '.terraformBootstrap'
+  tfStateStorageAccountName_test_eamci: 'avmgentsthscisub01tf'
+  tfStateContainerName_test_eamci: 'statefiles'
+  tfWorkingFolder_test_eamci: "$(System.DefaultWorkingDirectory)/10_projects/03_EamCi/10_Paas_tst"
+  tfStateFile_test_eamci: "eamci-test-paas.tfstate"
+  envConfiguration_test_eamci: "../../../env/10_Paas/50_eam/06_test.eamci.tfvars"
+  agent_pool_test_eamci: "vmss-ado-hs"
+  enable_apply_test_eamci: false

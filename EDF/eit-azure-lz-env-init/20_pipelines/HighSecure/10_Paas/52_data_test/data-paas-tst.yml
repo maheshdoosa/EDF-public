@@ -1,0 +1,49 @@
+---
+trigger:
+  branches:
+    include:
+      - production-hs
+  paths:
+    include:
+      - /10_projects/05_DataStrategy/10_Paas/10_Paas_tst
+      - /20_pipelines/HighSecure/10_Paas/52_data_test
+      - /env/10_Paas/52_data/10_Paas_tst
+# pr:
+#   branches:
+#     include:
+#       - production-hs
+#   paths:
+#     include:
+#       - /10_projects/05_DataStrategy/10_Paas/10_Paas_tst
+#       - /20_pipelines/HighSecure/10_Paas/52_data_test
+#       - /env/10_Paas/52_data/10_Paas_tst
+
+# pool:
+#   name: "Ubuntu-Agents"
+
+variables:
+  - template: 01_data-Deployment.yml
+  - template: 02_data-paas-vars-test.yml
+  - template: /20_pipelines/HighSecure/github-branch.yml
+
+# Anything below should not be modified ##
+stages:
+# MDW test
+  - template: ../../../Common/azure-deployment.yml
+    parameters:
+      environment_name: "Testdataapp"
+      branch_name: ${{ variables.branch_name }}
+      tf_workingfolder: ${{ variables.tfWorkingFolder_test_dataapp }}
+      stage_name: "Test_dataapp"
+      deployment_jobname: "Deployment_Test_dataapp"
+      teardown_jobname: "Teardown_Test_dataapp"
+      teardown_environment: ${{ variables.teardownEnvironment_test_dataapp }}
+      service_connectionname: ${{ variables.serviceConnectionName_test_dataapp }}
+      tf_stateresourcegroupname: ${{ variables.tfStateResourceGroupName_test_dataapp }}
+      tf_statestorageaccountname: ${{ variables.tfStateStorageAccountName_test_dataapp }}
+      tf_statecontainername: ${{ variables.tfStateContainerName_test_dataapp }}
+      tf_statefile: ${{ variables.tfStateFile_test_dataapp }}
+      env_configuration: ${{ variables.envConfiguration_test_dataapp }}
+      enable_stage: ${{ variables.enable_test_dataapp }}
+      agent_pool: ${{ variables.agent_pool_test_dataapp }}
+      enable_apply: ${{ variables.enable_apply_test_dataapp }}

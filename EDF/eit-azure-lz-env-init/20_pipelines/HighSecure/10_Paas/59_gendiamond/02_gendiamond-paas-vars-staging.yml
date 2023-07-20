@@ -1,0 +1,12 @@
+---
+variables:
+  # Gendiamond Staging
+  serviceConnectionName_staging_gendiamond: "gen-stg-hs-creach"
+  tfStateResourceGroupName_staging_gendiamond: ".terraformBootstrap"
+  tfStateStorageAccountName_staging_gendiamond: "avmgenstghscreachsub01tf"
+  tfStateContainerName_staging_gendiamond: "statefiles"
+  tfStateFile_staging_gendiamond: "gendiamond-staging-paas-new.tfstate"
+  tfWorkingFolder_staging_gendiamond:   "$(System.DefaultWorkingDirectory)/10_projects/14_GenDiamondHS/10_paas_stg"
+  envConfiguration_staging_gendiamond: "../../../env/10_Paas/59_gendiamond/04_gendiamondhs.staging.mgmt.tfvars"
+  agent_pool_staging_gendiamond: "vmss-ado-hs"
+  enable_apply_staging_gendiamond: false

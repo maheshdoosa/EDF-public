@@ -1,0 +1,12 @@
+---
+variables:
+  serviceConnectionName_production_gencore: "gen-prd-hs-mgmt"
+  tfStateResourceGroupName_production_gencore: ".terraformBootstrap"
+  tfStateStorageAccountName_production_gencore: "avmgenprdhsmgmtsub01tf"
+  tfStateContainerName_production_gencore: "statefiles"
+  tfWorkingFolder_gencore: "$(System.DefaultWorkingDirectory)/10_projects/13_GenCoreHS/15_Privatedns"
+  # tfStateFile_production_gencore: "gencore-prod-pvtdnsHS.tfstate"
+  tfStateFile_production_gencore: "gencore-prod-pvtdnsHS02.tfstate"
+  envConfiguration_production_gencore: "../../../env/15_Privatedns/58_gencore/03_prod.gencore.mgmt.tfvars" ##
+  agent_pool_production_gencore: "vmss-ado-hs"
+  enable_apply_production_gencore: false

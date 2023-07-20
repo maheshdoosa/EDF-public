@@ -1,0 +1,12 @@
+---
+variables:
+  # Control-M NonPrd
+  serviceConnectionName_nonprod_nuclear: "gen-mngdhs-prd"
+  tfStateResourceGroupName_nonprod_nuclear: ".terraformBootstrap"
+  tfStateStorageAccountName_nonprod_nuclear: "avmgenprdhsmngdsub01tf"
+  tfStateContainerName_nonprod_nuclear: "statefiles"
+  tfWorkingFolder_nonprod_nuclear: "$(System.DefaultWorkingDirectory)/10_projects/17_NuclearRnDHS/09_Iaas_preprd"
+  tfStateFile_nonprod_nuclear: "nuclear-preprd-iaas.tfstate"
+  envConfiguration_nonprod_nuclear: "../../../env/09_Iaas/61_nuclear/04_preprod.nuclear.mgmt.tfvars" #updated the value
+  agent_pool_nonprod_nuclear: "vmss-ado-hs"
+  enable_apply_nonprod_nuclear: false

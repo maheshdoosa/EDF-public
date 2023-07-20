@@ -1,0 +1,12 @@
+---
+variables:
+  # Control-M Sandpit
+  serviceConnectionName_sandpit_controlm: "eit-np-hs-mngd-sub-01-armconnection"
+  tfStateResourceGroupName_sandpit_controlm: ".terraformBootstrap"
+  tfStateStorageAccountName_sandpit_controlm: "avmeitnphsmngdsub01tf"
+  tfStateContainerName_sandpit_controlm: "statefiles"
+  tfWorkingFolder_sandpit_controlm: "$(System.DefaultWorkingDirectory)/10_projects/15_ControlMHS/09_Iaas_sandpit"
+  tfStateFile_sandpit_controlm: "controlm-sand-iaas.tfstate"
+  envConfiguration_sandpit_controlm: "../../../env/09_Iaas/60_controlm/05_sand.controlm.mgmt.tfvars" #updated the value
+  agent_pool_sandpit_controlm: "vmss-ado-hs"
+  enable_apply_sandpit_controlm: false

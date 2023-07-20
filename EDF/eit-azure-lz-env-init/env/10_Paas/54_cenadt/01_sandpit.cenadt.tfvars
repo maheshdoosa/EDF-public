@@ -1,0 +1,72 @@
+environment    = "Test"
+cenadtKvName   = "mgmtssinfrasecrets"
+cenadtKvRgName = ".security"
+
+cenadtResourceLocation               = "UK South"
+cenadtSubLogsRgName                  = "eit-uks-alz-tst-audit-rg-01"
+subLogsSA                            = "eituktestauditsa01"
+subLogsSAImmutabilityRetentionPeriod = 1                           ## for testing only
+tenantId                             = "tenantId"                  //key vault secret name as value
+SubscriptionId                       = "subscriptionId"            //key vault secret name as value
+cenadtContributorSPAppId             = "hsmgmtContributorSPAppId"  //key vault secret name as value
+cenadtContributorSPSecret            = "hsmgmtContributorSPSecret" //key vault secret name as value
+################# Boot Diag SA #############
+lzcenadtHSbootdiagsaRgName  = "ab-bootdiagsa-rg-o1"
+lzHubcenadtResourceLocation = "uksouth"
+vmDiagSAname                = "abbootdiagsa01"
+sa_endpoint_name            = "abtestsapep-01"
+sa_endpoint_SC              = "abtestsapepsc-01"
+sapep_subresource_names     = ["blob"]
+sa_private_dns_zone_name    = "privatelink.blob.core.windows.net"
+######### Recovery Services Vault #######
+resourceGroupName            = "ab-prdvmbackup-rg-01"
+resourceLocation             = "uksouth"
+recovery_vault_name          = "ab-prdvmbackup-rsv-01"
+sku                          = "Standard"
+soft_delete_enabled          = true
+log_analytics_workspace_name = "loganalytics"
+log_category                 = "CoreAzureBackup"
+log_category_enabled         = true
+log_category_retention       = true
+log_category_retention_days  = 0
+############ Backup Policies #############
+infraVM_backup_policy      = "Daily-2200-52W-AppVMs"
+vm_backup_policy_timezone  = "UTC"
+backup_policy_frequency    = "Daily"
+backup_policy_time         = "22:00"
+retention_daily_count      = 7
+retention_weekly_count     = 52
+retention_weekly_weekdays  = ["Sunday", "Wednesday", "Friday", "Saturday"]
+retention_monthly_count    = 12
+retention_monthly_weekdays = ["Sunday", "Wednesday"]
+retention_monthly_weeks    = ["First", "Last"]
+retention_yearly_count     = 1
+retention_yearly_weekdays  = ["Sunday"]
+retention_yearly_weeks     = ["Last"]
+retention_yearly_months    = ["January"]
+infraVM_backup_policy_02   = "Daily-2300-52W-AppVMs"
+backup_policy_time_02      = "23:00"
+
+#################### KV ################################
+keyvault_name                   = "ab-test-pkvt-01"
+resource_Location               = "uk south"
+kv_resource_group_name          = "ab-eit-prd-ade-rg-01"
+sku_name                        = "standard" // standard or premium HSM
+enabled_for_deployment          = "false"    //true or false
+enabled_for_disk_encryption     = "true"     //true or false
+enabled_for_template_deployment = "false"    //true or false
+soft_delete_retention_days      = "90"
+purge_protection_enabled        = "false" //true
+diagnosticsetting_name          = "keyVault-diagnostics"
+default_action                  = "Deny"          //Allow will enable access to all networks
+bypass                          = "AzureServices" //none
+private_dns_zone_name           = "privatelink.vaultcore.azure.net"
+endpoint_name                   = "abeitalzpkvt-pe"
+endpoint_SC                     = "abeitalzpkvt-pesc"
+is_manual_connection            = "false" //keep default false
+subresource_names               = ["vault"]
+lzpepNetworkingRgName           = "eit-uks-alz-ss-mgmt-vnet-rg2"
+lzpepVnetName                   = "eit-uks-alz-ss-mgmt-vnet-01"
+peSubnetName                    = "eit-alz-ss-wac-snet-01"
+aad_group                       = "test_ad_group02_sandpit_for_customrole"
+aad_user                        = "netra.lal.bhushal@azure.edfstaging.io"

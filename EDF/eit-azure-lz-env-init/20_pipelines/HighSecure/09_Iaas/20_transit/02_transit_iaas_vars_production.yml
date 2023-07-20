@@ -1,0 +1,12 @@
+---
+variables:
+  # Transit Prod
+  serviceConnectionName_production_transit: "az-lz-prod-transit"
+  tfStateResourceGroupName_production_transit: ".terraformBootstrap"
+  tfStateStorageAccountName_production_transit: "tfstateprodtransit"
+  tfStateContainerName_production_transit: "statefiles"
+  tfWorkingFolder_transit: "$(System.DefaultWorkingDirectory)/10_projects/02_Transit/09_Iaas"
+  tfStateFile_production_transit: "lzproduction-transit-iaas.tfstate"
+  envConfiguration_production_transit: "../../../env/09_Iaas/04_production.transit.tfvars"
+  agent_pool_production_transit: "vmss-ado-hs"
+  enable_apply_production_transit: false

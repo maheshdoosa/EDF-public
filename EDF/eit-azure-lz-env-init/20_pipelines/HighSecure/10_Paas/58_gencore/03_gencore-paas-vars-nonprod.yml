@@ -1,0 +1,14 @@
+---
+variables:
+  serviceConnectionName_nonprod_gencore: "gen-np-hs-mgmt"
+  tfStateResourceGroupName_nonprod_gencore: ".terraformBootstrap"
+  tfStateStorageAccountName_nonprod_gencore: "avmgennphsmgmtsub01tf"
+  tfStateContainerName_nonprod_gencore: "statefiles"
+  tfWorkingFolder_nonprod_gencore: "$(System.DefaultWorkingDirectory)/10_projects/13_GenCoreHS/10_Paas_nprd"
+  tfStateFile_nonprod_gencore: "gencore-nprd-paasHS.tfstate"
+  envConfiguration_nonprod_gencore: "../../../env/10_Paas/58_gencore/04_nprd.gencore.mgmt.tfvars"
+  agent_pool_nonprod_gencore: "vmss-ado-hs"
+  enable_apply_nonprod_gencore: false
+  # enable_import: false
+  # import_module_name: '"module.avmscripts-StorageAccount.azurerm_storage_account.az_sa_standard[0]"'
+  # ResourceID: "resourceGroups/.terraformBootstrap/providers/Microsoft.Storage/storageAccounts/avmgennphsmgmtsub01tf"

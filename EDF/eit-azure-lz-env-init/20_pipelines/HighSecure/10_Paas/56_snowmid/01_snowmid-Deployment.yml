@@ -1,0 +1,9 @@
+---
+variables:
+  # snowmid production
+  enable_production_snowmid: false
+  teardownEnvironment_production_snowmid: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

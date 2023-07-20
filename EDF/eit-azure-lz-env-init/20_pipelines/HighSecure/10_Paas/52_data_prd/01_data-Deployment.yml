@@ -1,0 +1,9 @@
+---
+variables:
+  # dataapp-production
+  enable_production_dataapp: false
+  teardownEnvironment_production_dataapp: false
+
+  # deployment info
+  deployment_reason: "regular"
+  deployment_id: "dev-work-20210208-b"

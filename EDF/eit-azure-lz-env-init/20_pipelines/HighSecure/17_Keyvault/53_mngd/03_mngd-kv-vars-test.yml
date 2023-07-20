@@ -1,0 +1,23 @@
+---
+variables:
+  # mngdapp tst
+  serviceConnectionName_test_mngdapp: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngdapp: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngdapp: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngdapp: "statefiles"
+  tfWorkingFolder_test_mngdapp:   "$(System.DefaultWorkingDirectory)/10_projects/08_ComsyHS/17_Keyvault"
+  tfStateFile_test_mngdapp: "mngd-test-kv-01.tfstate"
+  envConfiguration_test_mngdapp: "../../../env/17_Keyvault/53_mngd/02_test.mngd.mgmt.tfvars"
+  agent_pool_test_mngdapp: "vmss-ado-hs"
+  enable_apply_test_mngdapp: false
+
+  # mngddtgw Dev
+  serviceConnectionName_test_mngddtgw: "gen-mngdhs-test"
+  tfStateResourceGroupName_test_mngddtgw: ".terraformBootstrap"
+  tfStateStorageAccountName_test_mngddtgw: "avmgentsthsmngdsub01tf"
+  tfStateContainerName_test_mngddtgw: "statefiles"
+  tfWorkingFolder_mngddtgw: "$(System.DefaultWorkingDirectory)/10_projects/16_DataGatewayHS/17_Keyvault"
+  tfStateFile_test_mngddtgw: "mngddtgw-test-kv.tfstate"
+  envConfiguration_test_mngddtgw: "../../../env/17_Keyvault/53_mngd/02_test.mngddtgw.mgmt.tfvars"
+  agent_pool_test_mngddtgw: "vmss-ado-hs"
+  enable_apply_test_mngddtgw: false
